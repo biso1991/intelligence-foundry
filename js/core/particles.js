@@ -175,17 +175,3 @@ class ParticleSystem {
         requestAnimationFrame(() => this.animate());
     }
 }
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initParticles);
-} else {
-    initParticles();
-}
-
-function initParticles() {
-    const canvas = document.getElementById('hero-canvas');
-    if (canvas) {
-        new ParticleSystem(canvas);
-    }
-}

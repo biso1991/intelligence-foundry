@@ -7,11 +7,20 @@ class IntelligenceFoundry {
     }
 
     init() {
+        this.initParticles();
         this.setupNavigation();
         this.setupScrollEffects();
         this.setupProjects();
         this.setupInteractions();
         console.log('🔥 THE INTELLIGENCE FOUNDRY - Initialized');
+    }
+
+    initParticles() {
+        const canvas = document.getElementById('hero-canvas');
+        if (canvas && typeof ParticleSystem !== 'undefined') {
+            this.particleSystem = new ParticleSystem(canvas);
+            console.log('✨ Particle System - Activated');
+        }
     }
 
     setupNavigation() {
