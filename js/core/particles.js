@@ -25,16 +25,16 @@ class ParticleSystem {
     }
 
     createParticles() {
-        const particleCount = Math.min(100, Math.floor(window.innerWidth / 10));
+        const particleCount = Math.min(120, Math.floor(window.innerWidth / 8));
         
         for (let i = 0; i < particleCount; i++) {
             this.particles.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.5 + 0.3,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                radius: Math.random() * 2.5 + 1.5,
+                opacity: Math.random() * 0.4 + 0.6,
                 color: this.getParticleColor()
             });
         }
@@ -130,13 +130,13 @@ class ParticleSystem {
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
                 if (distance < maxDistance) {
-                    const opacity = (1 - distance / maxDistance) * 0.3;
+                    const opacity = (1 - distance / maxDistance) * 0.5;
                     
                     this.ctx.beginPath();
                     this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                     this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
                     this.ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-                    this.ctx.lineWidth = 1;
+                    this.ctx.lineWidth = 1.5;
                     this.ctx.stroke();
                 }
             }
@@ -150,13 +150,13 @@ class ParticleSystem {
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
                 if (distance < this.mouse.radius) {
-                    const opacity = (1 - distance / this.mouse.radius) * 0.5;
+                    const opacity = (1 - distance / this.mouse.radius) * 0.7;
                     
                     this.ctx.beginPath();
                     this.ctx.moveTo(particle.x, particle.y);
                     this.ctx.lineTo(this.mouse.x, this.mouse.y);
                     this.ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-                    this.ctx.lineWidth = 2;
+                    this.ctx.lineWidth = 2.5;
                     this.ctx.stroke();
                 }
             });
@@ -164,9 +164,18 @@ class ParticleSystem {
     }
 
     animate() {
-        // Clear canvas with fade effect
-        this.ctx.fillStyle = 'rgba(10, 14, 26, 0.1)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // Clear canvas completely first time, then use fade effect
+        if (!this.frameCount) {
+            this.frameCount = 0;
+            this.ctx.fillStyle = 'rgba(10, 14, 26, 1)';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        } else {
+            // Clear canvas with fade effect for trail
+            this.ctx.fillStyle = 'rgba(10, 14, 26, 0.15)';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+        
+        this.frameCount++;
 
         this.updateParticles();
         this.drawConnections();
