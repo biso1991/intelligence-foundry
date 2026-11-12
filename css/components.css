@@ -494,6 +494,11 @@
 
 /* === PROFILE PHOTO === */
 
+.section {
+  padding: var(--space-20) 0;
+  position: relative;
+}
+
 .hero-photo {
   margin-bottom: var(--space-8);
   animation: fadeInUp 0.8s ease-out;
@@ -569,10 +574,12 @@
 /* === PROJECT CARDS === */
 
 .projects-grid {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: var(--space-8);
   margin-top: var(--space-12);
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .project-card {
@@ -581,6 +588,9 @@
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-xl);
   transition: all var(--duration-base) var(--ease-out);
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 .project-card:hover {
