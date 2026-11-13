@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Lab | Bilel Nasri - Intelligence Foundry</title>
+    <link rel="stylesheet" href="css/design-tokens.css?v=2.0.0">
+    <link rel="stylesheet" href="css/animations.css?v=2.0.0">
+    <link rel="stylesheet" href="css/components.css?v=2.0.0">
+    <link rel="stylesheet" href="css/case-study.css?v=2.0.0">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#0a0e1a',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#00d4ff',
+                lineColor: '#00d4ff',
+                secondaryColor: '#111827',
+                tertiaryColor: '#1a1f35'
+            }
+        });
+    </script>
+    <style>
+        .architecture-lab {
+            padding: var(--space-20) var(--space-6);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .lab-hero {
+            text-align: center;
+            margin-bottom: var(--space-16);
+        }
+        
+        .lab-title {
+            font-size: var(--text-5xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-4);
+        }
+        
+        .lab-subtitle {
+            font-size: var(--text-xl);
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .architecture-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-16);
+        }
+        
+        .arch-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            transition: all var(--duration-base);
+        }
+        
+        .arch-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+        
+        .arch-header {
+            margin-bottom: var(--space-6);
+        }
+        
+        .arch-title {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            color: var(--accent-primary);
+            margin-bottom: var(--space-3);
+        }
+        
+        .arch-description {
+            font-size: var(--text-lg);
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .design-decisions {
+            margin-top: var(--space-8);
+            background: var(--bg-primary);
+            padding: var(--space-6);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent-secondary);
+        }
+        
+        .design-decisions h4 {
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin-bottom: var(--space-4);
+        }
+        
+        .design-decisions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .design-decisions li {
+            padding: var(--space-2) 0;
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .design-decisions li::before {
+            content: "→";
+            color: var(--accent-primary);
+            margin-right: var(--space-2);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <span class="brand-icon">🔥</span>
+                    <span>THE INTELLIGENCE FOUNDRY</span>
+                </a>
+                <a href="index.html#projects" class="nav-link">← Back to Portfolio</a>
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top: 80px;">
+        <div class="architecture-lab">
+            <div class="lab-hero">
+                <h1 class="lab-title">The Architecture Lab</h1>
+                <p class="lab-subtitle">
+                    System architectures demonstrating how data flows, ML models train, and production systems scale.<br>
+                    Each diagram represents engineering decisions made to balance reliability, performance, and maintainability.
+                </p>
+            </div>
+
+            <div class="architecture-grid">
+                <!-- Data Engineering Architecture -->
+                <div class="arch-card">
+                    <div class="arch-header">
+                        <h2 class="arch-title">🔄 Data Engineering Architecture</h2>
+                        <p class="arch-description">
+                            End-to-end data pipeline from raw sources to analytics-ready data warehouse. Demonstrates orchestration, transformation, and storage patterns used in production data systems.
+                        </p>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <pre class="mermaid">
+graph LR
+    A[Data Sources] --> B{Ingestion Layer}
+    B -->|Stream| C[Apache Kafka]
+    B -->|Batch| D[Apache Airflow]
+    
+    C --> E[Stream Processing]
+    D --> F[Batch Processing]
+    
+    E --> G[Data Validation]
+    F --> G
+    
+    G --> H{Transformation}
+    H -->|Clean| I[PostgreSQL]
+    H -->|Aggregate| J[Data Warehouse]
+    
+    I --> K[Analytics Layer]
+    J --> K
+    
+    L[Monitoring] -.Observes.- B
+    L -.Observes.- H
+    L -.Observes.- I
+    
+    style A fill:#1a1f35,stroke:#00d4ff
+    style C fill:#1a1f35,stroke:#8b5cf6
+    style D fill:#1a1f35,stroke:#8b5cf6
+    style I fill:#1a1f35,stroke:#10b981
+    style J fill:#1a1f35,stroke:#10b981
+    style K fill:#1a1f35,stroke:#f59e0b
+                        </pre>
+                    </div>
+
+                    <div class="design-decisions">
+                        <h4>Key Engineering Decisions</h4>
+                        <ul>
+                            <li><strong>Kafka for Streaming:</strong> Handles high-throughput real-time data with pub-sub pattern. Provides replay capability and decouples producers from consumers.</li>
+                            <li><strong>Airflow for Batch:</strong> DAG-based orchestration for complex workflows. Built-in retry logic, backfilling, and monitoring UI make operations manageable.</li>
+                            <li><strong>Validation Layer:</strong> Catches bad data before it pollutes downstream systems. Schema validation, null checks, and business rules enforced at ingestion.</li>
+                            <li><strong>PostgreSQL for OLTP:</strong> Transactional data requires ACID compliance. Foreign keys maintain referential integrity.</li>
+                            <li><strong>Separate Warehouse:</strong> Analytics queries shouldn't impact transactional performance. Columnar storage optimized for aggregations.</li>
+                            <li><strong>Observability:</strong> Monitoring at every layer. Know when pipelines fail, when data is stale, or when systems are degraded.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Machine Learning Pipeline -->
+                <div class="arch-card">
+                    <div class="arch-header">
+                        <h2 class="arch-title">🧠 Machine Learning Pipeline Architecture</h2>
+                        <p class="arch-description">
+                            Production ML pipeline from data preparation through model serving. Shows how models move from experimentation to reliable production deployment.
+                        </p>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <pre class="mermaid">
+graph TB
+    A[Raw Data] --> B[Data Validation]
+    B --> C[Feature Engineering]
+    C --> D[Feature Store]
+    
+    D --> E[Training Pipeline]
+    E --> F{Model Evaluation}
+    
+    F -->|Passed| G[Model Registry]
+    F -->|Failed| H[Retraining Loop]
+    H --> E
+    
+    G --> I[Model Serving]
+    I --> J[Prediction API]
+    
+    J --> K[Monitoring]
+    K -->|Drift Detected| H
+    K -->|Performance Degraded| H
+    
+    L[Experiment Tracking] -.Records.- E
+    M[A/B Testing] -.Splits Traffic.- I
+    
+    style A fill:#1a1f35,stroke:#00d4ff
+    style D fill:#1a1f35,stroke:#8b5cf6
+    style G fill:#1a1f35,stroke:#10b981
+    style J fill:#1a1f35,stroke:#f59e0b
+    style K fill:#1a1f35,stroke:#ef4444
+                        </pre>
+                    </div>
+
+                    <div class="design-decisions">
+                        <h4>Key Engineering Decisions</h4>
+                        <ul>
+                            <li><strong>Feature Store:</strong> Centralized feature repository prevents training-serving skew. Same features used in training and production.</li>
+                            <li><strong>Model Registry:</strong> Version control for models. Track which model is in production, who trained it, and what data was used.</li>
+                            <li><strong>Automated Retraining:</strong> Models degrade over time. Monitoring detects drift and triggers retraining without manual intervention.</li>
+                            <li><strong>Prediction API:</strong> FastAPI provides high-throughput async serving. Health checks, request validation, and error handling built-in.</li>
+                            <li><strong>A/B Testing:</strong> Never deploy a new model to 100% of traffic immediately. Gradual rollout with metrics comparison.</li>
+                            <li><strong>Experiment Tracking:</strong> MLflow or similar tool tracks hyperparameters, metrics, and artifacts for reproducibility.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- RAG Architecture -->
+                <div class="arch-card">
+                    <div class="arch-header">
+                        <h2 class="arch-title">🔍 RAG (Retrieval-Augmented Generation) Architecture</h2>
+                        <p class="arch-description">
+                            Modern AI system combining semantic search with large language models. Retrieves relevant context before generation to ground responses in factual data.
+                        </p>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <pre class="mermaid">
+graph LR
+    A[Documents] --> B[Document Parser]
+    B --> C[Chunking Strategy]
+    C --> D[Embedding Model]
+    D --> E[(Vector Database)]
+    
+    F[User Query] --> G[Query Embedding]
+    G --> H{Retrieval System}
+    
+    E -->|Semantic Search| H
+    H --> I[Top-K Results]
+    
+    I --> J[Context Builder]
+    J --> K[LLM Prompt]
+    K --> L[LLM Generation]
+    
+    L --> M[Response]
+    M --> N[Source Attribution]
+    
+    O[Evaluation] -.Measures.- L
+    O -.Measures.- H
+    
+    style A fill:#1a1f35,stroke:#00d4ff
+    style E fill:#1a1f35,stroke:#8b5cf6
+    style L fill:#1a1f35,stroke:#f59e0b
+    style M fill:#1a1f35,stroke:#10b981
+                        </pre>
+                    </div>
+
+                    <div class="design-decisions">
+                        <h4>Key Engineering Decisions</h4>
+                        <ul>
+                            <li><strong>Chunking Strategy:</strong> Chunk size affects retrieval quality. Too small loses context, too large reduces precision. Typically 512-1024 tokens with overlap.</li>
+                            <li><strong>Embedding Model:</strong> OpenAI ada-002, sentence-transformers, or domain-specific models. Trade-off between quality, cost, and latency.</li>
+                            <li><strong>Vector Database:</strong> Pinecone, Weaviate, or Qdrant for semantic search. Approximate nearest neighbor algorithms (HNSW, IVF) enable sub-second retrieval at scale.</li>
+                            <li><strong>Hybrid Retrieval:</strong> Combine semantic (vector) and keyword (BM25) search. Catches what one method misses.</li>
+                            <li><strong>Context Window Management:</strong> LLMs have token limits. Prioritize most relevant chunks, truncate if necessary, maintain coherence.</li>
+                            <li><strong>Source Attribution:</strong> Always return sources with responses. Users need to verify facts, and citations build trust.</li>
+                            <li><strong>Evaluation:</strong> Track retrieval precision (are top-K relevant?) and generation quality (is the answer accurate and grounded?).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Production API Architecture -->
+                <div class="arch-card">
+                    <div class="arch-header">
+                        <h2 class="arch-title">🚀 Production API Architecture</h2>
+                        <p class="arch-description">
+                            Reliable, scalable API design for serving ML models and data products. Shows patterns for handling failures, monitoring health, and maintaining uptime.
+                        </p>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <pre class="mermaid">
+graph TB
+    A[Client] -->|HTTPS| B[Load Balancer]
+    B --> C[API Gateway]
+    
+    C --> D{FastAPI Application}
+    
+    D --> E[Authentication]
+    E --> F[Rate Limiting]
+    F --> G[Request Validation]
+    
+    G --> H{Business Logic}
+    
+    H --> I[(Cache Redis)]
+    H --> J[ML Model Service]
+    H --> K[(PostgreSQL)]
+    
+    J --> L[Model Server]
+    
+    M[Health Checks] -.Monitors.- D
+    N[Metrics Exporter] -.Collects.- D
+    O[Logging] -.Records.- D
+    
+    P[Grafana] -.Visualizes.- N
+    Q[Alerts] -.Triggers.- P
+    
+    style A fill:#1a1f35,stroke:#00d4ff
+    style D fill:#1a1f35,stroke:#8b5cf6
+    style L fill:#1a1f35,stroke:#f59e0b
+    style M fill:#1a1f35,stroke:#10b981
+                        </pre>
+                    </div>
+
+                    <div class="design-decisions">
+                        <h4>Key Engineering Decisions</h4>
+                        <ul>
+                            <li><strong>FastAPI Framework:</strong> Async support for high concurrency. Automatic OpenAPI documentation. Pydantic for request/response validation.</li>
+                            <li><strong>Authentication & Authorization:</strong> JWT tokens for stateless auth. Role-based access control (RBAC) for different API endpoints.</li>
+                            <li><strong>Rate Limiting:</strong> Prevent abuse and ensure fair resource allocation. Per-user and per-IP limits with token bucket algorithm.</li>
+                            <li><strong>Caching Layer:</strong> Redis for frequently accessed data. Reduces database load and improves response times. Cache invalidation strategy critical.</li>
+                            <li><strong>Health Checks:</strong> /health endpoint checks database connectivity, model availability, and dependency health. Load balancer uses this for routing.</li>
+                            <li><strong>Observability Stack:</strong> Prometheus metrics, structured logging (JSON), distributed tracing for request flows. Know when something breaks and why.</li>
+                            <li><strong>Graceful Degradation:</strong> Circuit breakers for external dependencies. Return cached/stale data rather than failing completely.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons" style="margin-top: var(--space-16); justify-content: center;">
+                <a href="index.html#projects" class="btn-github">
+                    ← View Engineering Projects
+                </a>
+                <a href="index.html#contact" class="btn-github" style="background: var(--accent-primary); color: var(--bg-primary); border-color: var(--accent-primary);">
+                    Let's Build Together
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" style="margin-top: var(--space-20);">
+        <div class="container">
+            <p style="text-align: center; color: var(--text-tertiary);">© 2026 Bilel Nasri. Engineering Intelligence from Data.</p>
+        </div>
+    </footer>
+</body>
+</html>
