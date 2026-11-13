@@ -25,9 +25,27 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/design-tokens.css?v=1.5.0&t=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/animations.css?v=1.5.0&t=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/components.css?v=1.5.0&t=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/design-tokens.css?v=2.0.0">
+    <link rel="stylesheet" href="css/animations.css?v=2.0.0">
+    <link rel="stylesheet" href="css/components.css?v=2.0.0">
+    <link rel="stylesheet" href="css/case-study.css?v=2.0.0">
+    
+    <!-- Mermaid for Architecture Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#0a0e1a',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#00d4ff',
+                lineColor: '#00d4ff',
+                secondaryColor: '#111827',
+                tertiaryColor: '#1a1f35'
+            }
+        });
+    </script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
@@ -81,26 +99,24 @@
                 
                 <!-- Introduction -->
                 <div class="hero-intro slide-in-down">
-                    <span class="hero-label">Engineering Intelligence</span>
+                    <span class="hero-label">INTELLIGENCE FOUNDRY</span>
                 </div>
                 
                 <!-- Main Headline -->
                 <h1 class="hero-title">
-                    <span class="hero-name slide-in-left stagger-1">BILEL NASRI</span>
+                    <span class="hero-name slide-in-left stagger-1">Engineering the Intelligence Behind Data-Driven Systems</span>
                     <span class="hero-subtitle slide-in-left stagger-2">
-                        <span class="text-gradient">From Raw Data</span>
-                        <br>
-                        <span>to Intelligent Systems</span>
+                        <span>I design and build reliable data infrastructure, intelligent machine learning systems, and production-ready AI applications — transforming complex data into scalable intelligence.</span>
                     </span>
                 </h1>
                 
                 <!-- Professional Identity -->
                 <div class="hero-roles slide-in-up stagger-3">
-                    <div class="role-tag">Data Engineer</div>
+                    <div class="role-tag">Data Engineering</div>
                     <div class="role-separator">×</div>
-                    <div class="role-tag">AI Engineer</div>
+                    <div class="role-tag">Machine Learning & AI</div>
                     <div class="role-separator">×</div>
-                    <div class="role-tag">ML Engineer</div>
+                    <div class="role-tag">Production Systems</div>
                 </div>
                 
                 <!-- Mission Statement -->
