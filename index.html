@@ -25,11 +25,11 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/design-tokens.css?v=2.0.0">
-    <link rel="stylesheet" href="css/animations.css?v=2.0.0">
-    <link rel="stylesheet" href="css/components.css?v=2.0.0">
-    <link rel="stylesheet" href="css/case-study.css?v=2.0.0">
-    <link rel="stylesheet" href="css/pillars.css?v=2.0.0">
+    <link rel="stylesheet" href="css/design-tokens.css?v=2.1.0">
+    <link rel="stylesheet" href="css/animations.css?v=2.1.0">
+    <link rel="stylesheet" href="css/components.css?v=2.1.0">
+    <link rel="stylesheet" href="css/case-study.css?v=2.1.0">
+    <link rel="stylesheet" href="css/pillars.css?v=2.1.0">
     
     <!-- Mermaid for Architecture Diagrams -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -104,9 +104,10 @@
                 
                 <!-- Main Headline -->
                 <h1 class="hero-title">
-                    <span class="hero-name slide-in-left stagger-1">Engineering the Intelligence Behind Data-Driven Systems</span>
-                    <span class="hero-subtitle slide-in-left stagger-2">
-                        <span>I design and build reliable data infrastructure, intelligent machine learning systems, and production-ready AI applications — transforming complex data into scalable intelligence.</span>
+                    <span class="hero-name slide-in-left stagger-1">Bilel Nasri</span>
+                    <span class="hero-role slide-in-left stagger-2">Data Engineer & AI Engineer</span>
+                    <span class="hero-tagline slide-in-left stagger-3">
+                        <span>Engineering the Intelligence Behind Data-Driven Systems</span>
                     </span>
                 </h1>
                 
@@ -589,44 +590,45 @@
                 <div class="project-card">
                     <div class="project-header">
                         <span class="project-category">Data Engineering</span>
-                        <span class="project-status">Production</span>
+                        <span class="project-status">Open Source</span>
                     </div>
                     <h3 class="project-title">Apache Airflow Data Scraping Pipeline</h3>
-                    <p class="project-description">Production-ready data pipeline with Apache Airflow orchestration, PostgreSQL storage, Docker containerization, and comprehensive testing. Implements idempotent operations for reliable data ingestion workflows.</p>
+                    <p class="project-description">Production-ready ETL pipeline orchestrated with Apache Airflow 2.10.5. Implements idempotent UPSERT operations, Pydantic data validation, SQLAlchemy ORM, and comprehensive pytest test suite (481 test lines). Fully containerized with Docker Compose.</p>
                     
                     <div class="project-achievements">
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Airflow DAG orchestration with scheduled workflows</span>
+                            <span>5-task DAG with XCom data flow and retry logic</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>PostgreSQL database integration for data persistence</span>
+                            <span>PostgreSQL UPSERT for idempotent data persistence</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Docker containerization for reproducible environments</span>
+                            <span>Pydantic validation and error handling</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Comprehensive testing and idempotent operation design</span>
+                            <span>1,375 LOC with 481 lines of pytest tests</span>
                         </div>
                     </div>
                     
                     <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Apache Airflow</span>
+                        <span class="tech-tag">Airflow 2.10.5</span>
                         <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">SQLAlchemy</span>
+                        <span class="tech-tag">Pydantic</span>
                         <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Shell</span>
+                        <span class="tech-tag">pytest</span>
                     </div>
                     
                     <div class="project-links">
@@ -638,46 +640,46 @@
                 <!-- Project 2: NLP LSTM Project -->
                 <div class="project-card">
                     <div class="project-header">
-                        <span class="project-category">AI Engineering</span>
-                        <span class="project-status">Production</span>
+                        <span class="project-category">Machine Learning</span>
+                        <span class="project-status">Research</span>
                     </div>
                     <h3 class="project-title">Advanced NLP with LSTM Networks</h3>
-                    <p class="project-description">Collection of advanced Natural Language Processing experiments using LSTM networks for text classification, sentiment analysis, and text generation. End-to-end deep learning workflows with trained models and comprehensive datasets.</p>
+                    <p class="project-description">Collection of NLP experiments using LSTM networks in Jupyter notebooks: text classification on BBC News dataset, sentiment analysis, and text generation trained on Moby Dick. Demonstrates end-to-end deep learning workflows with TensorFlow/Keras.</p>
                     
                     <div class="project-achievements">
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>LSTM networks for text classification and sentiment analysis</span>
+                            <span>Text classification with LSTM on BBC News dataset</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Text generation models trained on literature datasets</span>
+                            <span>Sentiment analysis using recurrent neural networks</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Jupyter notebooks with end-to-end ML workflows</span>
+                            <span>Text generation model trained on literary corpus</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>BBC News and Moby Dick datasets for training</span>
+                            <span>Jupyter notebooks with full training pipelines</span>
                         </div>
                     </div>
                     
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">TensorFlow/Keras</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Keras</span>
                         <span class="tech-tag">LSTM</span>
                         <span class="tech-tag">Jupyter</span>
                         <span class="tech-tag">NLP</span>
-                        <span class="tech-tag">Deep Learning</span>
                     </div>
                     
                     <div class="project-links">
@@ -688,45 +690,45 @@
                 <!-- Project 3: Agricultural Marketplace -->
                 <div class="project-card">
                     <div class="project-header">
-                        <span class="project-category">Full Stack Development</span>
-                        <span class="project-status">Production</span>
+                        <span class="project-category">Full Stack</span>
+                        <span class="project-status">Development</span>
                     </div>
                     <h3 class="project-title">Agricultural Marketplace Platform</h3>
-                    <p class="project-description">E-commerce platform connecting farmers and customers for buying and selling agricultural products (olive oil, livestock, seeds). Modern marketplace supporting local agriculture with traditional products accessible online.</p>
+                    <p class="project-description">E-commerce platform connecting farmers and customers for trading agricultural products (olive oil, livestock, seeds). Built with Django REST framework, implementing user authentication, product management, and API endpoints. Containerized with Docker.</p>
                     
                     <div class="project-achievements">
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Full-featured e-commerce platform for agriculture</span>
+                            <span>Django-based REST API for marketplace operations</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Marketplace connecting farmers directly to customers</span>
+                            <span>User authentication and authorization system</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Docker containerization with Makefile automation</span>
+                            <span>Product catalog, blog system, and API views</span>
                         </div>
                         <div class="achievement-item">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M13 4L6 11 3 8"/>
                             </svg>
-                            <span>Support for local agriculture and traditional products</span>
+                            <span>Docker containerization with PostgreSQL database</span>
                         </div>
                     </div>
                     
                     <div class="project-tech">
-                        <span class="tech-tag">Python</span>
                         <span class="tech-tag">Django</span>
-                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Django REST</span>
                         <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">Makefile</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Python</span>
                     </div>
                     
                     <div class="project-links">

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airflow Data Pipeline - Case Study | Bilel Nasri</title>
-    <link rel="stylesheet" href="css/design-tokens.css?v=2.0.0">
-    <link rel="stylesheet" href="css/animations.css?v=2.0.0">
-    <link rel="stylesheet" href="css/components.css?v=2.0.0">
-    <link rel="stylesheet" href="css/case-study.css?v=2.0.0">
+    <link rel="stylesheet" href="css/design-tokens.css?v=2.0.1">
+    <link rel="stylesheet" href="css/animations.css?v=2.0.1">
+    <link rel="stylesheet" href="css/components.css?v=2.0.1">
+    <link rel="stylesheet" href="css/case-study.css?v=2.0.1">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({ 
@@ -48,8 +48,8 @@
                         <span class="meta-value">Data Engineering</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Status</span>
-                        <span class="meta-value">Production</span>
+                        <span class="meta-label">Repository</span>
+                        <span class="meta-value">Open Source</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Architecture</span>
@@ -59,44 +59,132 @@
             </div>
 
             <div class="case-study-section">
-                <h2 class="section-heading">The Problem</h2>
+                <h2 class="section-heading">Project Overview</h2>
                 <div class="problem-statement">
-                    <p><strong>Challenge:</strong> Building a reliable, production-ready data pipeline that scrapes external data sources, transforms the data, and loads it into PostgreSQL while handling failures gracefully and maintaining data quality.</p>
-                    <p style="margin-top: 1rem;"><strong>Why It Matters:</strong> Manual data collection is error-prone and doesn't scale. Organizations need automated, reliable pipelines with monitoring, retry logic, and idempotent operations to ensure consistent data availability.</p>
+                    <p>A production-ready data scraping pipeline built with <strong>Apache Airflow 2.10.5</strong>, demonstrating modern data engineering practices for building reliable, maintainable ETL workflows. The project showcases orchestration patterns, error handling strategies, and idempotent data operations.</p>
+                    <p style="margin-top: 1rem;"><strong>What I Built:</strong> A fully containerized pipeline that scrapes web data, validates it with Pydantic schemas, and persists to PostgreSQL using SQLAlchemy ORM with UPSERT logic to prevent duplicates.</p>
                 </div>
             </div>
 
             <div class="case-study-section">
                 <h2 class="section-heading">System Architecture</h2>
+                <p style="color: var(--text-secondary); margin-bottom: var(--space-6); line-height: var(--leading-relaxed);">
+                    The pipeline follows a five-stage workflow orchestrated by Airflow: <strong>Database Initialization → Scraping → Transformation → Persistence → Reporting</strong>. Each task can be retried independently if it fails.
+                </p>
                 <div class="architecture-diagram">
                     <pre class="mermaid">
 graph TB
-    A[External Data Sources] -->|HTTP Requests| B[Scraping Layer]
-    B -->|Raw Data| C[Data Validation]
-    C -->|Validated Data| D[Transformation Layer]
-    D -->|Cleaned Data| E[PostgreSQL Database]
+    A[Airflow Scheduler] -->|Triggers| B[Init Database Task]
+    B -->|Success| C[Scrape Data Task]
+    C -->|Raw Articles| D[Transform Data Task]
+    D -->|Validated Data| E[Persist Data Task]
+    E -->|Statistics| F[Generate Report Task]
     
-    F[Apache Airflow Scheduler] -->|Orchestrates| B
-    F -->|Monitors| C
-    F -->|Controls| D
-    F -->|Tracks| E
+    C -.Uses.- G[WebScraper Class]
+    G -->|HTTP GET| H[External Websites]
     
-    G[Docker Container] -.Contains.- F
-    G -.Contains.- B
-    G -.Contains.- E
+    D -.Uses.- I[DataTransformer Class]
+    I -->|Pydantic Validation| J[ArticleData Model]
     
-    H[Monitoring & Alerts] -->|Tracks Health| F
+    E -.Uses.- K[DataPersistence Class]
+    K -->|UPSERT| L[(PostgreSQL)]
     
-    style A fill:#1a1f35,stroke:#00d4ff,stroke-width:2px
-    style E fill:#1a1f35,stroke:#10b981,stroke-width:2px
-    style F fill:#1a1f35,stroke:#8b5cf6,stroke-width:2px
-    style G fill:#0a0e1a,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5
+    M[Docker Container] -.Contains.- A
+    M -.Contains.- L
+    
+    style A fill:#1a1f35,stroke:#8b5cf6,stroke-width:2px
+    style L fill:#1a1f35,stroke:#10b981,stroke-width:2px
+    style H fill:#1a1f35,stroke:#00d4ff,stroke-width:2px
+    style M fill:#0a0e1a,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5
                     </pre>
                 </div>
+            </div>
+
+            <div class="case-study-section">
+                <h2 class="section-heading">Verified Implementation Details</h2>
                 
-                <p style="color: var(--text-secondary); margin-top: var(--space-6); line-height: var(--leading-relaxed);">
-                    The architecture follows a layered approach: <strong>Ingestion → Validation → Transformation → Storage</strong>, all orchestrated by Airflow DAGs. Each layer is designed to fail gracefully and provide observability into the pipeline's health.
-                </p>
+                <h3 class="section-subheading">✅ What's Actually Implemented</h3>
+                <div class="decision-cards">
+                    <div class="decision-card">
+                        <div class="decision-title">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;">
+                                <path d="M16 6L8 14 4 10"/>
+                            </svg>
+                            Airflow DAG with Task Dependencies
+                        </div>
+                        <div class="decision-rationale">
+                            <strong>File:</strong> <code>dags/scraping_pipeline_dag.py</code> (232 lines)
+                            <br><br>
+                            The DAG defines 5 tasks with explicit dependencies using the <code>&gt;&gt;</code> operator. Configured with <code>retries=3</code>, <code>retry_delay=5 minutes</code>, and <code>execution_timeout=1 hour</code>. Scheduled daily at 2 AM UTC with <code>catchup=False</code> to prevent backfill on first deployment.
+                            <br><br>
+                            Tasks communicate via XCom (<code>xcom_push</code>/<code>xcom_pull</code>) to pass scraped data between stages.
+                        </div>
+                    </div>
+                    
+                    <div class="decision-card">
+                        <div class="decision-title">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;">
+                                <path d="M16 6L8 14 4 10"/>
+                            </svg>
+                            Idempotent UPSERT Operations
+                        </div>
+                        <div class="decision-rationale">
+                            <strong>File:</strong> <code>src/persistence.py</code> (131 lines)
+                            <br><br>
+                            Uses PostgreSQL's <code>INSERT ... ON CONFLICT DO UPDATE</code> via SQLAlchemy's <code>insert().on_conflict_do_update()</code>. The <code>article_url</code> field serves as the unique constraint. If a duplicate is detected, the record is updated instead of causing an error.
+                            <br><br>
+                            This makes the pipeline safe to run multiple times on the same data without creating duplicates or failing.
+                        </div>
+                    </div>
+                    
+                    <div class="decision-card">
+                        <div class="decision-title">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;">
+                                <path d="M16 6L8 14 4 10"/>
+                            </svg>
+                            Data Validation with Pydantic
+                        </div>
+                        <div class="decision-rationale">
+                            <strong>File:</strong> <code>src/transformer.py</code> (137 lines)
+                            <br><br>
+                            The <code>ArticleData</code> Pydantic model validates scraped data before database insertion. Enforces required fields (<code>article_url</code>, <code>source_url</code>, <code>title</code>, <code>content</code>) and validates content length constraints.
+                            <br><br>
+                            Invalid articles are logged and skipped rather than crashing the pipeline.
+                        </div>
+                    </div>
+                    
+                    <div class="decision-card">
+                        <div class="decision-title">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;">
+                                <path d="M16 6L8 14 4 10"/>
+                            </svg>
+                            Comprehensive Test Suite
+                        </div>
+                        <div class="decision-rationale">
+                            <strong>Files:</strong> <code>tests/test_scraper.py</code> (207 lines), <code>tests/test_transformer.py</code> (274 lines)
+                            <br><br>
+                            Unit tests cover scraper retry logic, fetch failures, transformation validation, and database operations. Uses pytest with mock objects to avoid hitting real websites during testing.
+                            <br><br>
+                            Tests verify idempotent behavior by running operations multiple times and checking for consistent results.
+                        </div>
+                    </div>
+                    
+                    <div class="decision-card">
+                        <div class="decision-title">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: text-bottom; margin-right: 8px;">
+                                <path d="M16 6L8 14 4 10"/>
+                            </svg>
+                            Docker Containerization
+                        </div>
+                        <div class="decision-rationale">
+                            <strong>Files:</strong> <code>Dockerfile</code>, <code>docker-compose.yaml</code>
+                            <br><br>
+                            Custom Airflow image based on <code>apache/airflow:2.10.5-python3.11</code>. Docker Compose orchestrates Airflow webserver, scheduler, worker, PostgreSQL, and Redis. All dependencies pinned in <code>requirements.txt</code>.
+                            <br><br>
+                            Environment variables configured via <code>.env</code> file for portability across development and production environments.
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="case-study-section">
@@ -108,10 +196,10 @@ graph TB
                             Orchestration
                         </div>
                         <ul class="tech-list">
-                            <li>Apache Airflow 2.x</li>
+                            <li>Apache Airflow 2.10.5</li>
+                            <li>PythonOperator tasks</li>
+                            <li>XCom for data passing</li>
                             <li>DAG-based workflows</li>
-                            <li>Task dependencies</li>
-                            <li>Retry mechanisms</li>
                         </ul>
                     </div>
                     
@@ -122,183 +210,153 @@ graph TB
                         </div>
                         <ul class="tech-list">
                             <li>PostgreSQL 14+</li>
-                            <li>ACID transactions</li>
-                            <li>Normalized schema</li>
-                            <li>Indexing strategy</li>
+                            <li>SQLAlchemy ORM</li>
+                            <li>UPSERT operations</li>
+                            <li>Unique constraints</li>
                         </ul>
                     </div>
                     
                     <div class="tech-category">
                         <div class="tech-category-title">
                             <span class="tech-category-icon">🐍</span>
-                            Core Language
+                            Core Libraries
                         </div>
                         <ul class="tech-list">
-                            <li>Python 3.10+</li>
-                            <li>Requests for HTTP</li>
-                            <li>BeautifulSoup/lxml</li>
-                            <li>SQLAlchemy ORM</li>
+                            <li>Python 3.11</li>
+                            <li>Requests (HTTP)</li>
+                            <li>BeautifulSoup4 (parsing)</li>
+                            <li>Pydantic (validation)</li>
                         </ul>
                     </div>
                     
                     <div class="tech-category">
                         <div class="tech-category-title">
-                            <span class="tech-category-icon">🐳</span>
-                            Infrastructure
+                            <span class="tech-category-icon">🧪</span>
+                            Testing
                         </div>
                         <ul class="tech-list">
-                            <li>Docker & Docker Compose</li>
-                            <li>Reproducible environments</li>
-                            <li>Health checks</li>
-                            <li>Volume persistence</li>
+                            <li>pytest framework</li>
+                            <li>unittest.mock</li>
+                            <li>481 lines of tests</li>
+                            <li>Fixtures in conftest.py</li>
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div class="case-study-section">
+                <h2 class="section-heading">Code Structure</h2>
+                
+                <div class="tech-stack-grid">
+                    <div class="tech-category">
+                        <div class="tech-category-title">Source Code</div>
+                        <ul class="tech-list">
+                            <li><code>config.py</code> - 86 lines</li>
+                            <li><code>models.py</code> - 74 lines</li>
+                            <li><code>scraper.py</code> - 229 lines</li>
+                            <li><code>transformer.py</code> - 137 lines</li>
+                            <li><code>persistence.py</code> - 131 lines</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-category">
+                        <div class="tech-category-title">DAGs</div>
+                        <ul class="tech-list">
+                            <li><code>scraping_pipeline_dag.py</code> - 232 lines</li>
+                            <li>5 task definitions</li>
+                            <li>Task dependency chain</li>
+                            <li>XCom data flow</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-category">
+                        <div class="tech-category-title">Tests</div>
+                        <ul class="tech-list">
+                            <li><code>test_scraper.py</code> - 207 lines</li>
+                            <li><code>test_transformer.py</code> - 274 lines</li>
+                            <li><code>conftest.py</code> - Fixtures</li>
+                            <li>Mock-based testing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-category">
+                        <div class="tech-category-title">Infrastructure</div>
+                        <ul class="tech-list">
+                            <li><code>Dockerfile</code> - Custom image</li>
+                            <li><code>docker-compose.yaml</code> - Multi-service</li>
+                            <li><code>requirements.txt</code> - Dependencies</li>
+                            <li><code>.env.example</code> - Configuration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-tertiary); margin-top: var(--space-6); line-height: var(--leading-relaxed); font-size: var(--text-sm);">
+                    <strong>Total:</strong> 1,375 lines of code across source files, DAGs, and tests. Full project includes comprehensive README (280+ lines), deployment instructions, and troubleshooting guides.
+                </p>
             </div>
 
             <div class="case-study-section">
                 <h2 class="section-heading">Engineering Decisions</h2>
                 
-                <div class="decision-cards">
-                    <div class="decision-card">
-                        <div class="decision-title">Why Airflow Over Cron Jobs?</div>
-                        <div class="decision-rationale">
-                            <strong>Decision:</strong> Apache Airflow provides DAG visualization, built-in retry logic, backfilling capabilities, and a web UI for monitoring — features that would require significant custom development with cron.
-                            <br><br>
-                            <strong>Trade-off:</strong> Added complexity and resource overhead, but gained operational visibility and reliability. For production data pipelines, the observability is worth the cost.
-                        </div>
-                    </div>
-                    
-                    <div class="decision-card">
-                        <div class="decision-title">PostgreSQL for Data Storage</div>
-                        <div class="decision-rationale">
-                            <strong>Decision:</strong> Chose PostgreSQL for its ACID compliance, support for complex queries, proven reliability, and strong ecosystem tooling.
-                            <br><br>
-                            <strong>Rationale:</strong> The data has clear relational structure. Foreign keys, transactions, and SQL queries make more sense than NoSQL for this use case. JSON columns provide flexibility when needed.
-                        </div>
-                    </div>
-                    
-                    <div class="decision-card">
-                        <div class="decision-title">Idempotent Operations</div>
-                        <div class="decision-rationale">
-                            <strong>Decision:</strong> All pipeline tasks are designed to be idempotent — running the same task multiple times produces the same result.
-                            <br><br>
-                            <strong>Implementation:</strong> Used UPSERT operations (INSERT ... ON CONFLICT UPDATE) and timestamp-based deduplication. This allows safe retries and backfilling without data corruption.
-                        </div>
-                    </div>
-                    
-                    <div class="decision-card">
-                        <div class="decision-title">Docker Containerization</div>
-                        <div class="decision-rationale">
-                            <strong>Decision:</strong> Containerized the entire stack (Airflow, PostgreSQL, scraping scripts) for environment consistency.
-                            <br><br>
-                            <strong>Benefits:</strong> "Works on my machine" problems eliminated. Easy deployment to different environments. Pinned dependency versions prevent unexpected breakage.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="case-study-section">
-                <h2 class="section-heading">Implementation Highlights</h2>
-                
                 <ul class="implementation-highlights">
-                    <li><strong>DAG Structure:</strong> Modular task definitions with clear dependencies. Sensors for waiting on external conditions, operators for transformations, hooks for database connections.</li>
+                    <li><strong>Why Airflow?</strong> Provides DAG visualization, built-in retry logic, scheduling, monitoring UI, and backfill capabilities — features that would require significant custom development with alternatives like cron jobs.</li>
                     
-                    <li><strong>Error Handling:</strong> Comprehensive try-catch blocks with custom error types. Failed tasks trigger Airflow's built-in alerting. Partial failures don't crash the entire pipeline.</li>
+                    <li><strong>Idempotency by Design:</strong> Used PostgreSQL UPSERT operations and timestamp-based deduplication. This allows safe retries, manual reruns, and backfilling without data corruption.</li>
                     
-                    <li><strong>Data Validation:</strong> Schema validation before database insertion. Null checks, type validation, and business rule enforcement prevent bad data from polluting the warehouse.</li>
+                    <li><strong>Fail Gracefully:</strong> Each scraping source is wrapped in try-except blocks. If one source fails, the pipeline continues with others and logs the error rather than crashing the entire DAG.</li>
                     
-                    <li><strong>Monitoring:</strong> Airflow's web UI shows task duration, success rates, and failure patterns. PostgreSQL logs tracked for slow queries. Custom metrics exported for dashboarding.</li>
+                    <li><strong>Configuration as Code:</strong> All settings (database URLs, scrape targets, rate limits) managed via environment variables and Pydantic settings. No hardcoded values in the source code.</li>
                     
-                    <li><strong>Testing Strategy:</strong> Unit tests for transformation logic. Integration tests with test database. DAG validation tests ensure syntax correctness before deployment.</li>
+                    <li><strong>Testing Strategy:</strong> Used mocks to avoid hitting real websites during tests. Verified retry logic, validation behavior, and UPSERT operations with test databases.</li>
                 </ul>
             </div>
 
             <div class="case-study-section">
-                <h2 class="section-heading">Reliability & Testing</h2>
+                <h2 class="section-heading">What I Learned</h2>
                 
-                <div class="tech-stack-grid">
-                    <div class="tech-category">
-                        <div class="tech-category-title">Testing Approach</div>
-                        <ul class="tech-list">
-                            <li>Unit tests for pure functions</li>
-                            <li>Integration tests with TestDB</li>
-                            <li>DAG structure validation</li>
-                            <li>End-to-end smoke tests</li>
-                        </ul>
-                    </div>
+                <ul class="implementation-highlights">
+                    <li><strong>Start Simple, Add Complexity Later:</strong> The first version had a basic DAG with minimal error handling. I added retry logic, validation, and monitoring incrementally based on what broke in testing.</li>
                     
-                    <div class="tech-category">
-                        <div class="tech-category-title">Reliability Mechanisms</div>
-                        <ul class="tech-list">
-                            <li>Automatic retries (3 attempts)</li>
-                            <li>Exponential backoff</li>
-                            <li>Idempotent operations</li>
-                            <li>Health check endpoints</li>
-                        </ul>
-                    </div>
+                    <li><strong>Observability is Critical:</strong> Airflow's UI makes debugging significantly easier. Being able to see which task failed, read logs, and inspect XCom data saved countless hours.</li>
                     
-                    <div class="tech-category">
-                        <div class="tech-category-title">Monitoring</div>
-                        <ul class="tech-list">
-                            <li>Task success/failure rates</li>
-                            <li>Execution duration tracking</li>
-                            <li>Data freshness alerts</li>
-                            <li>Database connection health</li>
-                        </ul>
-                    </div>
+                    <li><strong>Test the Failure Paths:</strong> The most valuable tests were the ones that simulated failures (network timeout, invalid data, database unavailable). That's where bugs hide.</li>
                     
-                    <div class="tech-category">
-                        <div class="tech-category-title">Operational Excellence</div>
-                        <ul class="tech-list">
-                            <li>Documented runbooks</li>
-                            <li>Clear error messages</li>
-                            <li>Rollback procedures</li>
-                            <li>Configuration as code</li>
-                        </ul>
-                    </div>
-                </div>
+                    <li><strong>Idempotency Takes Effort:</strong> Making operations truly idempotent requires careful thinking about state, timestamps, and unique constraints. But it's worth it for operational safety.</li>
+                </ul>
             </div>
 
             <div class="case-study-section">
-                <h2 class="section-heading">Results & Learnings</h2>
+                <h2 class="section-heading">Repository Access</h2>
                 
                 <div class="results-grid">
                     <div class="result-card">
-                        <div class="result-icon">✅</div>
-                        <div class="result-value">Production</div>
-                        <div class="result-label">System deployed and operational</div>
+                        <div class="result-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+                                <path d="M16 0C7.16 0 0 7.16 0 16c0 7.08 4.58 13.06 10.94 15.18.8.15 1.09-.34 1.09-.76 0-.38-.01-1.64-.02-3.22-4.45.97-5.39-2.14-5.39-2.14-.73-1.85-1.78-2.34-1.78-2.34-1.45-.99.11-.97.11-.97 1.6.11 2.45 1.65 2.45 1.65 1.43 2.45 3.76 1.74 4.68 1.33.14-1.04.56-1.74 1.02-2.14-3.56-.4-7.3-1.78-7.30-7.92 0-1.75.62-3.18 1.64-4.3-.16-.4-.71-2.03.16-4.23 0 0 1.34-.43 4.4 1.64 1.28-.35 2.65-.53 4.01-.54 1.36.01 2.73.19 4.01.54 3.06-2.07 4.4-1.64 4.4-1.64.87 2.2.32 3.83.16 4.23 1.02 1.12 1.64 2.55 1.64 4.3 0 6.16-3.75 7.52-7.32 7.92.58.5 1.09 1.48 1.09 2.98 0 2.15-.02 3.88-.02 4.41 0 .43.29.92 1.1.76C27.42 29.06 32 23.08 32 16c0-8.84-7.16-16-16-16z"/>
+                            </svg>
+                        </div>
+                        <div class="result-value">Open Source</div>
+                        <div class="result-label">Full source code available</div>
                     </div>
                     
                     <div class="result-card">
-                        <div class="result-icon">🔄</div>
-                        <div class="result-value">Automated</div>
-                        <div class="result-label">Daily scheduled execution</div>
+                        <div class="result-icon">📄</div>
+                        <div class="result-value">1,375</div>
+                        <div class="result-label">Lines of code</div>
                     </div>
                     
                     <div class="result-card">
-                        <div class="result-icon">🛡️</div>
-                        <div class="result-value">Reliable</div>
-                        <div class="result-label">Idempotent & retry-safe</div>
+                        <div class="result-icon">🧪</div>
+                        <div class="result-value">481</div>
+                        <div class="result-label">Lines of tests</div>
                     </div>
                     
                     <div class="result-card">
-                        <div class="result-icon">📊</div>
-                        <div class="result-value">Observable</div>
-                        <div class="result-label">Full monitoring & alerting</div>
+                        <div class="result-icon">📚</div>
+                        <div class="result-value">280+</div>
+                        <div class="result-label">Lines of documentation</div>
                     </div>
                 </div>
-                
-                <h3 class="section-subheading">Key Learnings</h3>
-                <ul class="implementation-highlights">
-                    <li><strong>Start Simple:</strong> Began with basic DAG, added complexity incrementally. Early over-engineering would have slowed development without delivering value.</li>
-                    
-                    <li><strong>Observability First:</strong> Added logging and monitoring from day one. Debugging production issues without visibility is nearly impossible.</li>
-                    
-                    <li><strong>Test the Failure Paths:</strong> Deliberately tested what happens when external APIs are down, databases are unreachable, or data is malformed. Resilience comes from handling failures gracefully.</li>
-                    
-                    <li><strong>Documentation Matters:</strong> Wrote clear README, setup instructions, and troubleshooting guides. Future self (and collaborators) will thank you.</li>
-                </ul>
             </div>
 
             <div class="cta-buttons">
