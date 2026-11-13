@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="css/animations.css?v=2.0.0">
     <link rel="stylesheet" href="css/components.css?v=2.0.0">
     <link rel="stylesheet" href="css/case-study.css?v=2.0.0">
+    <link rel="stylesheet" href="css/pillars.css?v=2.0.0">
     
     <!-- Mermaid for Architecture Diagrams -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -62,9 +63,8 @@
                 
                 <div class="nav-links" id="nav-links">
                     <a href="#hero" class="nav-link">Home</a>
-                    <a href="#data-engineering" class="nav-link">Data Engineering</a>
-                    <a href="#ml-lab" class="nav-link">ML Lab</a>
-                    <a href="#ai-engineering" class="nav-link">AI Engineering</a>
+                    <a href="#engineering-pillars" class="nav-link">Engineering</a>
+                    <a href="architecture-lab.html" class="nav-link">Architecture Lab</a>
                     <a href="#projects" class="nav-link">Projects</a>
                     <a href="#contact" class="nav-link">Contact</a>
                 </div>
@@ -129,14 +129,14 @@
                 
                 <!-- Call to Actions -->
                 <div class="hero-actions slide-in-up stagger-5">
-                    <a href="#data-engineering" class="btn btn-primary">
+                    <a href="#engineering-pillars" class="btn btn-primary">
                         <span>Explore My Engineering</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 10h10M10 5l5 5-5 5"/>
                         </svg>
                     </a>
-                    <a href="#projects" class="btn btn-secondary">
-                        <span>View Projects</span>
+                    <a href="architecture-lab.html" class="btn btn-secondary">
+                        <span>Architecture Lab</span>
                     </a>
                 </div>
                 
@@ -207,6 +207,349 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 5v14M5 12l7 7 7-7"/>
             </svg>
+        </div>
+    </section>
+
+    <!-- Engineering Pillars Section -->
+    <section id="engineering-pillars" class="section pillars-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">ENGINEERING FOUNDATIONS</span>
+                <h2 class="section-title">Three Pillars of Intelligent Systems</h2>
+                <p class="section-subtitle">
+                    Every production system I build rests on three foundational pillars — 
+                    data foundations that scale, intelligence layers that learn, and production systems that never stop.
+                </p>
+            </div>
+
+            <!-- Pillars Grid -->
+            <div class="pillars-grid">
+                <!-- Pillar 1: Data Foundations -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="12" width="40" height="8" rx="2"/>
+                            <rect x="4" y="24" width="40" height="8" rx="2"/>
+                            <rect x="4" y="36" width="40" height="8" rx="2"/>
+                            <line x1="12" y1="16" x2="36" y2="16"/>
+                            <line x1="12" y1="28" x2="36" y2="28"/>
+                            <line x1="12" y1="40" x2="36" y2="40"/>
+                        </svg>
+                    </div>
+                    <h3 class="pillar-title">Data Foundations</h3>
+                    <p class="pillar-description">
+                        Reliable pipelines that ingest, transform, and persist data at scale. 
+                        Every intelligent system starts here — where raw information becomes structured, validated, production-grade data.
+                    </p>
+                    
+                    <div class="pillar-capabilities">
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Pipeline Orchestration</span>
+                                <span class="capability-level expert">Expert</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">Apache Airflow</span>
+                                <span class="tech-badge">Prefect</span>
+                                <span class="tech-badge">DAGs</span>
+                            </div>
+                            <p class="capability-context">
+                                Built production DAGs orchestrating multi-stage data workflows with idempotent operations, 
+                                dependency management, and comprehensive error handling.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Distributed Processing</span>
+                                <span class="capability-level advanced">Advanced</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">Apache Spark</span>
+                                <span class="tech-badge">PySpark</span>
+                                <span class="tech-badge">Dask</span>
+                            </div>
+                            <p class="capability-context">
+                                Scaled batch and streaming workloads across clusters, optimizing partitioning strategies 
+                                and resource allocation for terabyte-scale datasets.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Data Storage & Modeling</span>
+                                <span class="capability-level expert">Expert</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">PostgreSQL</span>
+                                <span class="tech-badge">MongoDB</span>
+                                <span class="tech-badge">Redis</span>
+                                <span class="tech-badge">MinIO/S3</span>
+                            </div>
+                            <p class="capability-context">
+                                Designed schemas for OLTP and OLAP workloads, implemented indexing strategies, 
+                                and optimized query patterns for sub-second response times at scale.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Stream Processing</span>
+                                <span class="capability-level proficient">Proficient</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">Apache Kafka</span>
+                                <span class="tech-badge">Event Streaming</span>
+                            </div>
+                            <p class="capability-context">
+                                Built real-time data pipelines with Kafka producers/consumers, 
+                                ensuring at-least-once delivery semantics and fault-tolerant stream processing.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="case-study-airflow.html" class="pillar-link">
+                        View Airflow Case Study →
+                    </a>
+                </div>
+
+                <!-- Pillar 2: Intelligence Layer -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="24" cy="24" r="20"/>
+                            <circle cx="24" cy="24" r="12"/>
+                            <circle cx="24" cy="24" r="4"/>
+                            <line x1="24" y1="4" x2="24" y2="12"/>
+                            <line x1="24" y1="36" x2="24" y2="44"/>
+                            <line x1="4" y1="24" x2="12" y2="24"/>
+                            <line x1="36" y1="24" x2="44" y2="24"/>
+                            <line x1="10" y1="10" x2="16" y2="16"/>
+                            <line x1="32" y1="32" x2="38" y2="38"/>
+                            <line x1="38" y1="10" x2="32" y2="16"/>
+                            <line x1="16" y1="32" x2="10" y2="38"/>
+                        </svg>
+                    </div>
+                    <h3 class="pillar-title">Intelligence Layer</h3>
+                    <p class="pillar-description">
+                        Machine learning systems that extract patterns, make predictions, and generate insights. 
+                        From classical ML to deep learning to LLMs — intelligence that scales beyond rule-based systems.
+                    </p>
+                    
+                    <div class="pillar-capabilities">
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Deep Learning & NLP</span>
+                                <span class="capability-level expert">Expert</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">PyTorch</span>
+                                <span class="tech-badge">TensorFlow</span>
+                                <span class="tech-badge">Transformers</span>
+                                <span class="tech-badge">LSTM</span>
+                            </div>
+                            <p class="capability-context">
+                                Built and trained LSTM networks for text classification and generation, 
+                                fine-tuned transformer models for domain-specific NLP tasks with custom training loops.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Large Language Models</span>
+                                <span class="capability-level advanced">Advanced</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">LangChain</span>
+                                <span class="tech-badge">OpenAI</span>
+                                <span class="tech-badge">RAG</span>
+                                <span class="tech-badge">Vector DBs</span>
+                            </div>
+                            <p class="capability-context">
+                                Architected RAG systems with vector databases for retrieval-augmented generation, 
+                                implemented prompt engineering strategies, and built LLM-powered applications.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">ML Operations</span>
+                                <span class="capability-level advanced">Advanced</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">MLflow</span>
+                                <span class="tech-badge">Weights & Biases</span>
+                                <span class="tech-badge">DVC</span>
+                            </div>
+                            <p class="capability-context">
+                                Tracked experiments with metric logging, versioned models and datasets, 
+                                and automated model deployment pipelines with reproducible training workflows.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Classical ML & Feature Engineering</span>
+                                <span class="capability-level expert">Expert</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">scikit-learn</span>
+                                <span class="tech-badge">XGBoost</span>
+                                <span class="tech-badge">Feature Stores</span>
+                            </div>
+                            <p class="capability-context">
+                                Engineered features from raw data, built ensemble models, performed hyperparameter tuning, 
+                                and validated models with cross-validation and statistical testing.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="#projects" class="pillar-link">
+                        View ML Projects →
+                    </a>
+                </div>
+
+                <!-- Pillar 3: Production Systems -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="6" y="8" width="36" height="32" rx="2"/>
+                            <line x1="6" y1="16" x2="42" y2="16"/>
+                            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                            <circle cx="18" cy="12" r="1.5" fill="currentColor"/>
+                            <circle cx="24" cy="12" r="1.5" fill="currentColor"/>
+                            <rect x="12" y="22" width="10" height="12" rx="1"/>
+                            <rect x="26" y="22" width="10" height="12" rx="1"/>
+                            <line x1="14" y1="26" x2="20" y2="26"/>
+                            <line x1="14" y1="30" x2="20" y2="30"/>
+                            <line x1="28" y1="26" x2="34" y2="26"/>
+                            <line x1="28" y1="30" x2="34" y2="30"/>
+                        </svg>
+                    </div>
+                    <h3 class="pillar-title">Production Systems</h3>
+                    <p class="pillar-description">
+                        Containerized, tested, monitored systems that run 24/7 in production. 
+                        Infrastructure that scales, APIs that respond in milliseconds, and deployments that never break.
+                    </p>
+                    
+                    <div class="pillar-capabilities">
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">API Development</span>
+                                <span class="capability-level expert">Expert</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">FastAPI</span>
+                                <span class="tech-badge">Django</span>
+                                <span class="tech-badge">Flask</span>
+                                <span class="tech-badge">REST</span>
+                            </div>
+                            <p class="capability-context">
+                                Built production REST APIs with authentication, rate limiting, request validation, 
+                                comprehensive error handling, and OpenAPI documentation.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Containerization & Orchestration</span>
+                                <span class="capability-level expert">Expert</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">Docker</span>
+                                <span class="tech-badge">Docker Compose</span>
+                                <span class="tech-badge">Kubernetes</span>
+                            </div>
+                            <p class="capability-context">
+                                Containerized multi-service applications with optimized images, orchestrated deployments 
+                                with health checks, resource limits, and rolling updates.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Testing & Reliability</span>
+                                <span class="capability-level advanced">Advanced</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">pytest</span>
+                                <span class="tech-badge">unittest</span>
+                                <span class="tech-badge">CI/CD</span>
+                            </div>
+                            <p class="capability-context">
+                                Wrote unit, integration, and end-to-end tests with mocking strategies, 
+                                automated testing in CI pipelines, and maintained >80% code coverage.
+                            </p>
+                        </div>
+                        
+                        <div class="capability-item">
+                            <div class="capability-header">
+                                <span class="capability-name">Cloud & Infrastructure</span>
+                                <span class="capability-level proficient">Proficient</span>
+                            </div>
+                            <div class="capability-tech">
+                                <span class="tech-badge">AWS</span>
+                                <span class="tech-badge">GCP</span>
+                                <span class="tech-badge">Terraform</span>
+                            </div>
+                            <p class="capability-context">
+                                Deployed services to cloud platforms with infrastructure-as-code, 
+                                configured auto-scaling, and managed cloud resources for cost optimization.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="architecture-lab.html" class="pillar-link">
+                        View Architecture Lab →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Engineering Principles -->
+            <div class="principles-section">
+                <h3 class="principles-title">Engineering Principles</h3>
+                <p class="principles-subtitle">
+                    These principles guide every system I design, every line of code I write, and every architecture decision I make.
+                </p>
+                
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <div class="principle-icon">🛡️</div>
+                        <h4>Reliability First</h4>
+                        <p>Systems must handle failures gracefully. Idempotent operations, comprehensive error handling, and retry mechanisms ensure data integrity even when things break.</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">🔬</div>
+                        <h4>Reproducibility</h4>
+                        <p>Every pipeline, model, and deployment must be reproducible. Version-controlled code, containerized environments, and declarative configurations eliminate "works on my machine" problems.</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">📊</div>
+                        <h4>Observability</h4>
+                        <p>You can't fix what you can't see. Structured logging, metrics collection, and monitoring dashboards provide visibility into system behavior and performance.</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">🧪</div>
+                        <h4>Test Everything</h4>
+                        <p>Untested code is broken code. Unit tests validate logic, integration tests verify components work together, and end-to-end tests ensure the system delivers value.</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">📈</div>
+                        <h4>Incremental Improvement</h4>
+                        <p>Perfect is the enemy of good. Ship working solutions, measure results, gather feedback, and iterate. Small improvements compound into transformative systems.</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">⚖️</div>
+                        <h4>Graceful Degradation</h4>
+                        <p>When external dependencies fail, systems should degrade gracefully rather than crash. Fallback mechanisms and circuit breakers maintain partial functionality.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -287,6 +630,7 @@
                     </div>
                     
                     <div class="project-links">
+                        <a href="case-study-airflow.html" class="project-link">Full Case Study →</a>
                         <a href="https://github.com/biso1991/airflow-data-scraping-pipeline" class="project-link" target="_blank">GitHub →</a>
                     </div>
                 </div>
