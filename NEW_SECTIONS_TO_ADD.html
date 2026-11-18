@@ -1,0 +1,390 @@
+<!-- 
+    ENHANCED PORTFOLIO SECTIONS
+    Add these sections to your index.html where appropriate
+-->
+
+<!-- 1. ADD TO <head> section - New Scripts and Styles -->
+<link rel="stylesheet" href="css/enhanced-animations.css?v=3.0.0">
+<script src="js/data-flow-animation.js?v=3.0.0" defer></script>
+<script src="js/live-api-status.js?v=3.0.0" defer></script>
+<script src="js/animated-counter.js?v=3.0.0" defer></script>
+
+<!-- 2. UPDATE Hero Stats Section - Add Animated Counters -->
+<!-- Replace your existing hero stats with this: -->
+<div class="hero-stats">
+    <div class="stat">
+        <span class="stat-number" data-animate-counter data-target="6" data-suffix="+">0</span>
+        <span class="stat-label">Production Projects</span>
+    </div>
+    <div class="stat">
+        <span class="stat-number" data-animate-counter data-target="1963">0</span>
+        <span class="stat-label">Data Records</span>
+    </div>
+    <div class="stat">
+        <span class="stat-number" data-animate-counter data-target="43" data-suffix="+">0</span>
+        <span class="stat-label">Tests Passing</span>
+    </div>
+    <div class="stat">
+        <span class="stat-number" data-animate-counter data-target="0" data-suffix="$">0</span>
+        <span class="stat-label">Monthly Hosting Cost</span>
+    </div>
+</div>
+
+<!-- 3. ADD AFTER Hero Section - Animated Data Pipeline -->
+<section class="data-flow-section">
+    <div class="container">
+        <div class="data-flow-header">
+            <h2 class="data-flow-title">Live Data Pipeline</h2>
+            <p class="data-flow-subtitle">
+                Real-time visualization of data flowing through production systems - 
+                from raw ingestion to intelligent APIs
+            </p>
+        </div>
+        <canvas id="data-flow-canvas"></canvas>
+    </div>
+</section>
+
+<!-- 4. ADD IN Projects Section - Live API Status -->
+<section class="live-systems-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">🔴 Live Production Systems</h2>
+            <p class="section-description">
+                Real-time status of production APIs serving data to thousands of requests
+            </p>
+        </div>
+        
+        <!-- This div will be populated by live-api-status.js -->
+        <div id="live-api-status"></div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://api-dashboard-bt8.pages.dev" target="_blank" class="btn btn-primary">
+                🚀 View Interactive Dashboard
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 5. ADD NEW PROJECT CARDS - Data Intelligence Platform Projects -->
+<!-- Add these to your projects section -->
+
+<!-- Project: Data Intelligence Dashboard -->
+<div class="project-card project-card-enhanced">
+    <div class="project-header">
+        <div class="project-badge featured">NEW</div>
+        <div class="project-badge live">LIVE</div>
+    </div>
+    
+    <div class="project-icon">🎨</div>
+    <h3 class="project-title">Data Intelligence Dashboard</h3>
+    
+    <p class="project-description">
+        Interactive web dashboard providing real-time monitoring and data exploration for production REST APIs. 
+        Features live status tracking, search functionality, and interactive testing tools with modern dark theme UI.
+    </p>
+    
+    <div class="project-metrics">
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="2">0</span>
+            <span class="metric-label">APIs Connected</span>
+        </div>
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="1963">0</span>
+            <span class="metric-label">Data Records</span>
+        </div>
+        <div class="metric">
+            <span class="metric-value">100%</span>
+            <span class="metric-label">Responsive</span>
+        </div>
+    </div>
+    
+    <div class="project-features">
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Real-time API status monitoring with health checks
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Interactive search & filter (IP allocations, countries)
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Live statistics dashboard with auto-refresh
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Code examples in cURL, Python, JavaScript
+        </div>
+    </div>
+    
+    <div class="tech-stack">
+        <span class="tech-badge-animated">HTML5</span>
+        <span class="tech-badge-animated">CSS3</span>
+        <span class="tech-badge-animated">JavaScript</span>
+        <span class="tech-badge-animated">REST APIs</span>
+        <span class="tech-badge-animated">Fetch API</span>
+        <span class="tech-badge-animated">Cloudflare Pages</span>
+    </div>
+    
+    <div class="project-links">
+        <a href="https://api-dashboard-bt8.pages.dev" target="_blank" class="btn btn-primary">
+            🚀 View Live
+        </a>
+        <a href="https://github.com/biso1991/data-intelligence-platform/tree/master/frontend" target="_blank" class="btn btn-outline">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            Source Code
+        </a>
+    </div>
+</div>
+
+<!-- Project: IP Intelligence API -->
+<div class="project-card project-card-enhanced">
+    <div class="project-header">
+        <div class="project-badge live">LIVE</div>
+    </div>
+    
+    <div class="project-icon">📡</div>
+    <h3 class="project-title">IP Intelligence Database API</h3>
+    
+    <p class="project-description">
+        Production RESTful API providing comprehensive IP allocation data for Middle East regions. 
+        Built with FastAPI and deployed with automatic Swagger documentation, search capabilities, and pagination.
+    </p>
+    
+    <div class="project-metrics">
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="1942">0</span>
+            <span class="metric-label">IP Allocations</span>
+        </div>
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="18.5" data-suffix="M">0</span>
+            <span class="metric-label">IP Addresses</span>
+        </div>
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="8">0</span>
+            <span class="metric-label">Endpoints</span>
+        </div>
+    </div>
+    
+    <div class="project-features">
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            8 RESTful JSON endpoints with OpenAPI 3.1 specs
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            SQLite database with 1,942 IP allocation records
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Search, filter, and pagination functionality
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Auto-generated Swagger UI documentation
+        </div>
+    </div>
+    
+    <div class="tech-stack">
+        <span class="tech-badge-animated">Python 3.11</span>
+        <span class="tech-badge-animated">FastAPI</span>
+        <span class="tech-badge-animated">SQLite</span>
+        <span class="tech-badge-animated">Uvicorn</span>
+        <span class="tech-badge-animated">Pydantic</span>
+        <span class="tech-badge-animated">Render.com</span>
+    </div>
+    
+    <div class="project-links">
+        <a href="https://ip-intelligence-api-yaov.onrender.com/docs" target="_blank" class="btn btn-primary">
+            📖 API Docs
+        </a>
+        <a href="https://github.com/biso1991/data-intelligence-platform/tree/master/ip-intelligence" target="_blank" class="btn btn-outline">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            Source Code
+        </a>
+    </div>
+</div>
+
+<!-- Project: Web Data Collection API -->
+<div class="project-card project-card-enhanced">
+    <div class="project-header">
+        <div class="project-badge live">LIVE</div>
+    </div>
+    
+    <div class="project-icon">🌍</div>
+    <h3 class="project-title">Web Data Collection Platform API</h3>
+    
+    <p class="project-description">
+        Ethical web data collection platform with compliance framework. 
+        Collects country data from public APIs with rate limiting, robots.txt compliance, and CLI interface.
+    </p>
+    
+    <div class="project-metrics">
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="21">0</span>
+            <span class="metric-label">Countries</span>
+        </div>
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="10">0</span>
+            <span class="metric-label">API Endpoints</span>
+        </div>
+        <div class="metric">
+            <span class="metric-value" data-animate-counter data-target="2">0</span>
+            <span class="metric-label">Collection Runs</span>
+        </div>
+    </div>
+    
+    <div class="project-features">
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            CLI interface for data collection with rate limiting
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            10 REST endpoints with search and filter capabilities
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Compliance framework respecting robots.txt & ToS
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">✓</span>
+            Tracks collection runs, sources, and metadata
+        </div>
+    </div>
+    
+    <div class="tech-stack">
+        <span class="tech-badge-animated">Python 3.11</span>
+        <span class="tech-badge-animated">FastAPI</span>
+        <span class="tech-badge-animated">SQLite</span>
+        <span class="tech-badge-animated">Click</span>
+        <span class="tech-badge-animated">Requests</span>
+        <span class="tech-badge-animated">Render.com</span>
+    </div>
+    
+    <div class="project-links">
+        <a href="https://web-data-collection-api.onrender.com/docs" target="_blank" class="btn btn-primary">
+            📖 API Docs
+        </a>
+        <a href="https://github.com/biso1991/data-intelligence-platform/tree/master/web-data-platform" target="_blank" class="btn btn-outline">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            Source Code
+        </a>
+    </div>
+</div>
+
+<!-- 6. ADD Enhanced Statistics Showcase Section -->
+<section class="stats-showcase-section">
+    <div class="container">
+        <h2 class="section-title">Production Impact</h2>
+        <p class="section-description">
+            Real metrics from live production systems serving global traffic
+        </p>
+        
+        <div class="stats-showcase">
+            <div class="stat-showcase-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" data-animate-counter data-target="1963">0</div>
+                <div class="stat-label">Total Records</div>
+                <div class="stat-detail">Across all databases</div>
+            </div>
+            
+            <div class="stat-showcase-card">
+                <div class="stat-icon">🧪</div>
+                <div class="stat-number" data-animate-counter data-target="43" data-suffix="+">0</div>
+                <div class="stat-label">Tests Passing</div>
+                <div class="stat-detail">100% code coverage</div>
+            </div>
+            
+            <div class="stat-showcase-card">
+                <div class="stat-icon">🔌</div>
+                <div class="stat-number" data-animate-counter data-target="18">0</div>
+                <div class="stat-label">API Endpoints</div>
+                <div class="stat-detail">RESTful JSON APIs</div>
+            </div>
+            
+            <div class="stat-showcase-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Uptime</div>
+                <div class="stat-detail">Production ready</div>
+            </div>
+            
+            <div class="stat-showcase-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-number" data-animate-counter data-target="0" data-suffix="$">0</div>
+                <div class="stat-label">Monthly Cost</div>
+                <div class="stat-detail">Free tier hosting</div>
+            </div>
+            
+            <div class="stat-showcase-card">
+                <div class="stat-icon">🚀</div>
+                <div class="stat-number" data-animate-counter data-target="3">0</div>
+                <div class="stat-label">Live Deployments</div>
+                <div class="stat-detail">Auto-deploy enabled</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. ADD Specializations with Animated Progress Bars -->
+<!-- Add to your Engineering Pillars or Skills section -->
+<div class="specializations-animated">
+    <h3>Core Specializations</h3>
+    
+    <div class="skill-progress">
+        <div class="skill-progress-header">
+            <span class="skill-name">Data Engineering & ETL</span>
+            <span class="skill-level">Expert</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="--progress-width: 95%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-progress-header">
+            <span class="skill-name">REST API Development</span>
+            <span class="skill-level">Expert</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="--progress-width: 92%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-progress-header">
+            <span class="skill-name">Machine Learning & AI</span>
+            <span class="skill-level">Advanced</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="--progress-width: 88%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-progress-header">
+            <span class="skill-name">Cloud & DevOps</span>
+            <span class="skill-level">Advanced</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="--progress-width: 85%"></div>
+        </div>
+    </div>
+    
+    <div class="skill-progress">
+        <div class="skill-progress-header">
+            <span class="skill-name">Frontend Development</span>
+            <span class="skill-level">Proficient</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="--progress-width: 78%"></div>
+        </div>
+    </div>
+</div>
