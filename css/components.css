@@ -99,23 +99,19 @@
 }
 
 .nav-toggle {
-  display: flex !important;
+  display: none;
   flex-direction: column;
   gap: 4px;
-  background: red;
-  border: 3px solid yellow;
+  background: none;
+  border: none;
   cursor: pointer;
-  padding: 10px;
-  margin-left: var(--space-4);
-  width: 40px;
-  height: 40px;
+  padding: var(--space-2);
 }
 
 .nav-toggle span {
   width: 24px;
-  height: 3px;
-  background: white;
-  display: block;
+  height: 2px;
+  background: var(--text-primary);
   transition: all var(--duration-base);
 }
 
@@ -138,6 +134,10 @@
   .nav-links.active {
     transform: translateY(0);
     opacity: 1;
+  }
+
+  .nav-toggle {
+    display: flex;
   }
 }
 
