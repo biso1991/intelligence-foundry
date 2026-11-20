@@ -117,6 +117,7 @@
 
 @media (max-width: 768px) {
   .nav-links {
+    display: none;
     position: fixed;
     top: 60px;
     left: 0;
@@ -126,21 +127,18 @@
     flex-direction: column;
     padding: var(--space-6);
     border-bottom: 1px solid var(--border-subtle);
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
     z-index: 1000;
   }
 
   .nav-links.active {
-    max-height: 500px;
-    opacity: 1;
+    display: flex;
   }
 
   .nav-link {
     padding: var(--space-3) 0;
     border-bottom: 1px solid var(--border-subtle);
+    width: 100%;
+    text-align: left;
   }
 
   .nav-link:last-child {
