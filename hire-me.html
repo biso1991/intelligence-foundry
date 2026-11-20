@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Me - Bilel Nasri | Freelance Data Engineer & AI Engineer</title>
+    <meta name="description" content="Hire experienced freelance Data Engineer specializing in Kafka, Airflow, Spark, and AI/ML systems. 4+ years building production data pipelines.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/design-tokens.css?v=2.1.0">
+    <link rel="stylesheet" href="css/animations.css?v=2.1.0">
+    <link rel="stylesheet" href="css/components.css?v=2.1.0">
+    
+    <style>
+        .hire-hero {
+            background: linear-gradient(135deg, #0a0e1a 0%, #111827 100%);
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hire-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
+            border-radius: 50px;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .availability-badge .dot {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hire-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hire-subtitle {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            display: block;
+        }
+
+        .quick-stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a1f35 0%, #0f1419 100%);
+            border: 2px solid #1e293b;
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .service-card.featured {
+            border-color: #00d4ff;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .service-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #0a0e1a;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: #00d4ff;
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f8fafc;
+        }
+
+        .service-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price small {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .service-timeline {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .service-features li {
+            padding: 0.75rem 0;
+            color: #cbd5e1;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .btn-hire {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-hire:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .process-section {
+            background: #1a1f35;
+            padding: 6rem 0;
+            margin: 4rem 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #0a0e1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f8fafc;
+        }
+
+        .step-description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #1a1f35 0%, #0f1419 100%);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0a0e1a;
+        }
+
+        .author-info h4 {
+            color: #f8fafc;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .tech-stack-section {
+            padding: 4rem 0;
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            color: #00d4ff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tech-badge .years {
+            background: rgba(0, 212, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1a1f35 0%, #0f1419 100%);
+            border: 2px solid #00d4ff;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .hire-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-stats {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <span class="brand-icon">🔥</span>
+                    <span class="brand-text">THE INTELLIGENCE FOUNDRY</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="hire-me.html" class="nav-link active">Hire Me</a>
+                    <a href="schedule-meeting.html" class="nav-link">Schedule Meeting</a>
+                    <a href="index.html#projects" class="nav-link">Projects</a>
+                    <a href="mailto:binasri1991@gmail.com" class="nav-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hire-hero">
+        <div class="container">
+            <div class="availability-badge">
+                <span class="dot"></span>
+                Available for New Projects
+            </div>
+            
+            <h1 class="hire-title">Hire a Senior Data Engineer</h1>
+            <p class="hire-subtitle">
+                I build production-ready data pipelines and AI systems that scale. 
+                Specialized in Kafka, Airflow, Spark, and LLM integration.
+                <strong>4 years of freelance experience</strong> delivering measurable results.
+            </p>
+            
+            <div class="quick-stats">
+                <div class="quick-stat">
+                    <span class="quick-stat-value">4+</span>
+                    <span class="quick-stat-label">Years Experience</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-value">12+</span>
+                    <span class="quick-stat-label">Projects Delivered</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-value">99.9%</span>
+                    <span class="quick-stat-label">System Uptime</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-value">48h</span>
+                    <span class="quick-stat-label">Response Time</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Pricing -->
+    <section class="container">
+        <div style="text-align: center; margin: 4rem 0 2rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #f8fafc;">Services & Pricing</h2>
+            <p style="color: #94a3b8; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                Flexible packages tailored to your needs. All prices are negotiable based on project scope.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Starter Package -->
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3 class="service-name">Starter</h3>
+                <div class="service-price">
+                    Starting at $3,000
+                    <small>/ project</small>
+                </div>
+                <p class="service-timeline">⏱️ 2-3 weeks delivery</p>
+                
+                <ul class="service-features">
+                    <li>Data pipeline setup & implementation</li>
+                    <li>ETL/ELT workflow design</li>
+                    <li>PostgreSQL or MongoDB integration</li>
+                    <li>Basic Kafka or Airflow setup</li>
+                    <li>Docker containerization</li>
+                    <li>Code documentation & handoff</li>
+                    <li>1 month post-launch support</li>
+                </ul>
+                
+                <a href="schedule-meeting.html" class="btn-hire">Get Started</a>
+            </div>
+
+            <!-- Professional Package (Featured) -->
+            <div class="service-card featured">
+                <div class="service-icon">⚡</div>
+                <h3 class="service-name">Professional</h3>
+                <div class="service-price">
+                    Starting at $8,000
+                    <small>/ project</small>
+                </div>
+                <p class="service-timeline">⏱️ 4-6 weeks delivery</p>
+                
+                <ul class="service-features">
+                    <li>Distributed data platform architecture</li>
+                    <li>Advanced Kafka streaming pipelines</li>
+                    <li>Airflow orchestration with monitoring</li>
+                    <li>Real-time analytics dashboard</li>
+                    <li>Spark/PySpark data processing</li>
+                    <li>Redis caching & optimization</li>
+                    <li>Full observability stack (Prometheus/Grafana)</li>
+                    <li>Load testing & performance tuning</li>
+                    <li>3 months post-launch support</li>
+                </ul>
+                
+                <a href="schedule-meeting.html" class="btn-hire">Most Popular</a>
+            </div>
+
+            <!-- Enterprise Package -->
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3 class="service-name">Enterprise</h3>
+                <div class="service-price">
+                    Starting at $15,000
+                    <small>/ project</small>
+                </div>
+                <p class="service-timeline">⏱️ 8-12 weeks delivery</p>
+                
+                <ul class="service-features">
+                    <li>End-to-end AI/ML platform</li>
+                    <li>RAG + LLM integration (LangChain/LangGraph)</li>
+                    <li>Multi-agent AI systems</li>
+                    <li>Distributed workers with fault tolerance</li>
+                    <li>Complete observability & monitoring</li>
+                    <li>AWS/GCP cloud architecture</li>
+                    <li>CI/CD pipeline automation</li>
+                    <li>Security best practices implementation</li>
+                    <li>Performance optimization</li>
+                    <li>Team training & knowledge transfer</li>
+                    <li>6 months post-launch support</li>
+                </ul>
+                
+                <a href="schedule-meeting.html" class="btn-hire">Let's Talk</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(0, 212, 255, 0.05); border-radius: 12px;">
+            <p style="color: #94a3b8; font-size: 1.1rem;">
+                💰 <strong>Hourly Rate</strong>: $50-75/hour (negotiable based on project) <br>
+                📅 <strong>Availability</strong>: Can start within 1-2 weeks <br>
+                🌍 <strong>Remote Work</strong>: Available worldwide (UTC+1 timezone)
+            </p>
+        </div>
+    </section>
+
+    <!-- Work Process -->
+    <section class="process-section">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #f8fafc;">How I Work</h2>
+                <p style="color: #94a3b8; font-size: 1.1rem;">
+                    Transparent, collaborative process from start to finish
+                </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Discovery Call</h3>
+                    <p class="step-description">
+                        Free 30-minute consultation to understand your requirements and technical challenges
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Proposal & Quote</h3>
+                    <p class="step-description">
+                        Detailed scope, timeline, milestones, and pricing delivered within 24 hours
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Development</h3>
+                    <p class="step-description">
+                        Weekly updates, GitHub commits, progress calls, and continuous feedback
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Delivery & Handoff</h3>
+                    <p class="step-description">
+                        Complete documentation, code review, deployment support, and team training
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Post-Launch Support</h3>
+                    <p class="step-description">
+                        Bug fixes, monitoring, performance tuning, and technical guidance included
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack-section container">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #f8fafc;">Tech Stack</h2>
+            <p style="color: #94a3b8; font-size: 1.1rem;">
+                Proven expertise with modern data engineering and AI tools
+            </p>
+        </div>
+
+        <div class="tech-badges">
+            <div class="tech-badge">Python <span class="years">4 yrs</span></div>
+            <div class="tech-badge">Apache Kafka <span class="years">3 yrs</span></div>
+            <div class="tech-badge">Apache Airflow <span class="years">3 yrs</span></div>
+            <div class="tech-badge">Apache Spark <span class="years">2 yrs</span></div>
+            <div class="tech-badge">PostgreSQL <span class="years">4 yrs</span></div>
+            <div class="tech-badge">Docker <span class="years">4 yrs</span></div>
+            <div class="tech-badge">FastAPI <span class="years">3 yrs</span></div>
+            <div class="tech-badge">LangChain <span class="years">2 yrs</span></div>
+            <div class="tech-badge">RAG Systems <span class="years">2 yrs</span></div>
+            <div class="tech-badge">AWS <span class="years">3 yrs</span></div>
+            <div class="tech-badge">Redis <span class="years">3 yrs</span></div>
+            <div class="tech-badge">Django <span class="years">4 yrs</span></div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="container">
+        <div style="text-align: center; margin: 4rem 0 2rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #f8fafc;">Client Testimonials</h2>
+            <p style="color: #94a3b8; font-size: 1.1rem;">
+                What clients say about working with me
+            </p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "Bilel delivered a production-ready Kafka pipeline that handles 10,000+ messages per second. 
+                    Clean code, excellent documentation, and very responsive to feedback. Highly recommend!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MT</div>
+                    <div class="author-info">
+                        <h4>Michael Thompson</h4>
+                        <p>Tech Lead, E-commerce Platform</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "Built our influencer analytics platform from scratch using RAG and LangChain. 
+                    The system saved us 3 months of development time. Professional work and great communication."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SL</div>
+                    <div class="author-info">
+                        <h4>Sarah Lee</h4>
+                        <p>CTO, Marketing SaaS</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "Bilel is technically excellent and delivered on time. Our data pipelines haven't failed once 
+                    in 6 months. Worth every penny for the quality and reliability."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RK</div>
+                    <div class="author-info">
+                        <h4>Raj Kumar</h4>
+                        <p>Data Team Lead, FinTech Startup</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-section">
+            <h2>Ready to Build Something Great?</h2>
+            <p>Let's discuss your project and how I can help you achieve your goals</p>
+            
+            <div class="cta-buttons">
+                <a href="schedule-meeting.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                    📅 Schedule Free Consultation
+                </a>
+                <a href="mailto:binasri1991@gmail.com?subject=Project Inquiry&body=Hi Bilel,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject Type:%0D%0ABudget Range:%0D%0ATimeline:%0D%0A%0D%0AThank you!" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                    ✉️ Email Me Directly
+                </a>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="color: #94a3b8; margin-bottom: 1rem;">
+                    <strong>Contact Information:</strong>
+                </p>
+                <p style="color: #cbd5e1;">
+                    📧 binasri1991@gmail.com<br>
+                    📱 +216 96 321 618 (WhatsApp available)<br>
+                    🌍 Based in Tunisia • Available worldwide • Fluent in English, French, Arabic<br>
+                    💼 LinkedIn: <a href="https://www.linkedin.com/in/bilel-n-2b9ba8215/" style="color: #00d4ff; text-decoration: none;">bilel-n-2b9ba8215</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; color: #64748b; border-top: 1px solid #1e293b;">
+        <div class="container">
+            <p>© 2026 Bilel Nasri • Data Engineer & AI Engineer</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="index.html" style="color: #00d4ff; text-decoration: none;">Portfolio</a> •
+                <a href="https://github.com/biso1991" style="color: #00d4ff; text-decoration: none;">GitHub</a> •
+                <a href="https://www.linkedin.com/in/bilel-n-2b9ba8215/" style="color: #00d4ff; text-decoration: none;">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
