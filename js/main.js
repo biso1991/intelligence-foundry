@@ -121,7 +121,7 @@ class IntelligenceFoundry {
                     'Active learning workflows for model fine-tuning'
                 ],
                 status: 'production',
-                github: null,
+                github: 'https://github.com/biso1991/nlp-finetuning-qa-platform',
                 live: 'https://www.kaggle.com/bilelnasri'
             },
             {
