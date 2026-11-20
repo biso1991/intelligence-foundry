@@ -99,13 +99,14 @@
 }
 
 .nav-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
   padding: var(--space-2);
+  margin-left: var(--space-4);
 }
 
 .nav-toggle span {
@@ -128,15 +129,12 @@
     transform: translateY(-100%);
     opacity: 0;
     transition: all var(--duration-base);
+    z-index: 1000;
   }
 
   .nav-links.active {
     transform: translateY(0);
     opacity: 1;
-  }
-
-  .nav-toggle {
-    display: flex;
   }
 }
 
