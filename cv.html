@@ -18,6 +18,19 @@
     <link rel="stylesheet" href="css/components.css">
     
     <style>
+        body {
+            background: var(--bg-primary, #0a0e1a);
+            color: var(--text-primary, #f8fafc);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-4, 1rem);
+        }
+
         .cv-hero {
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(168, 85, 247, 0.05));
             padding: var(--space-24) 0 var(--space-16);
@@ -435,14 +448,17 @@
                 </div>
 
                 <div class="cv-actions">
-                    <a href="/home/bilel/Desktop/CV_Bilel_Nasri_2026.pdf" download class="btn btn-primary">
-                        <span>Download PDF</span>
+                    <a href="mailto:binasri1991@gmail.com?subject=Request%20for%20CV%20PDF" class="btn btn-primary">
+                        <span>Request CV PDF</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 3v11M5 10l5 5 5-5M3 17h14"/>
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                     </a>
                     <a href="hire-me.html" class="btn btn-secondary">
                         <span>Hire Me</span>
+                    </a>
+                    <a href="schedule-meeting.html" class="btn btn-secondary">
+                        <span>Schedule Meeting</span>
                     </a>
                 </div>
             </div>
