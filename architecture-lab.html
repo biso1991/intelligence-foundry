@@ -24,6 +24,25 @@
         });
     </script>
     <style>
+        body {
+            background: var(--bg-primary, #0a0e1a);
+            color: var(--text-primary, #f8fafc);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-4, 1rem);
+        }
+
+        .mermaid {
+            background: var(--bg-primary, #0a0e1a);
+            padding: var(--space-4, 1rem);
+            border-radius: var(--radius-lg, 0.5rem);
+        }
+
         .architecture-lab {
             padding: var(--space-20) var(--space-6);
             max-width: 1400px;
@@ -119,14 +138,23 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
+    <nav class="nav" id="main-nav">
         <div class="container">
             <div class="nav-content">
                 <a href="index.html" class="nav-brand">
                     <span class="brand-icon">🔥</span>
-                    <span>THE INTELLIGENCE FOUNDRY</span>
+                    <span class="brand-text">THE INTELLIGENCE FOUNDRY</span>
                 </a>
-                <a href="index.html#projects" class="nav-link">← Back to Portfolio</a>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#engineering-pillars" class="nav-link">Engineering</a>
+                    <a href="architecture-lab.html" class="nav-link">Architecture Lab</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="cv.html" class="nav-link">CV</a>
+                    <a href="hire-me.html" class="nav-link nav-link-cta">Hire Me</a>
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
