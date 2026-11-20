@@ -40,6 +40,9 @@
         .cv-header {
             text-align: center;
             margin-bottom: var(--space-12);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cv-name {
@@ -48,21 +51,28 @@
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: var(--space-2);
+            margin-bottom: var(--space-3);
         }
 
         .cv-title {
             font-size: var(--text-2xl);
             color: var(--text-secondary);
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-8);
+            font-weight: var(--font-medium);
+            padding-bottom: var(--space-6);
+            border-bottom: 2px solid var(--border-medium);
         }
 
         .cv-contact {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: var(--space-6);
+            gap: var(--space-4);
             margin-bottom: var(--space-8);
+            padding: var(--space-6);
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-medium);
         }
 
         .contact-item {
@@ -85,8 +95,10 @@
 
         .cv-actions {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: var(--space-4);
+            margin-top: var(--space-6);
         }
 
         .cv-summary {
