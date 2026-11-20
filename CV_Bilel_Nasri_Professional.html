@@ -243,16 +243,43 @@
         .download-banner strong {
             font-size: 16px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         
-        .download-instructions {
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-download {
+            background: white;
+            color: #3498db;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 20px;
-            margin-top: 5px;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-download:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-download svg {
+            width: 20px;
+            height: 20px;
         }
         
         .download-step {
@@ -260,6 +287,7 @@
             align-items: center;
             gap: 5px;
             font-size: 12px;
+            color: rgba(255,255,255,0.9);
         }
         
         .close-banner {
@@ -292,13 +320,23 @@
     <!-- Download Instructions Banner -->
     <div class="download-banner" id="downloadBanner">
         <button class="close-banner" onclick="closeBanner()">×</button>
-        <strong>📥 To Download This CV as PDF:</strong>
-        <div class="download-instructions">
-            <span class="download-step">1️⃣ Press <strong>Ctrl+P</strong> (Windows) or <strong>Cmd+P</strong> (Mac)</span>
-            <span class="download-step">2️⃣ Select "<strong>Save as PDF</strong>"</span>
-            <span class="download-step">3️⃣ Check "<strong>Background graphics</strong>"</span>
-            <span class="download-step">4️⃣ Click <strong>Save</strong></span>
+        <strong>📥 Download Your Professional CV</strong>
+        <div class="download-buttons">
+            <button class="btn-download" onclick="downloadPDF()">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 3v11m0 0l-4-4m4 4l4-4M3 17h14"/>
+                </svg>
+                Download as PDF
+            </button>
+            <span class="download-step">or</span>
+            <button class="btn-download" onclick="window.print()">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2z"/>
+                </svg>
+                Print to PDF (Ctrl+P)
+            </button>
         </div>
+        <p class="download-step" style="margin-top: 8px;">Click "Download as PDF" for instant download, or use Print (Ctrl+P) for custom settings</p>
     </div>
     <!-- Header -->
     <div class="header">
@@ -556,7 +594,25 @@
             document.body.classList.remove('banner-visible');
         }
         
-        // Auto-hide banner after 10 seconds
+        function downloadPDF() {
+            // Hide banner before generating PDF
+            var banner = document.getElementById('downloadBanner');
+            banner.style.display = 'none';
+            document.body.classList.remove('banner-visible');
+            
+            // Trigger print dialog which allows saving as PDF
+            setTimeout(function() {
+                window.print();
+                
+                // Show banner again after print dialog closes
+                setTimeout(function() {
+                    banner.style.display = 'block';
+                    document.body.classList.add('banner-visible');
+                }, 1000);
+            }, 100);
+        }
+        
+        // Auto-hide banner after 15 seconds
         setTimeout(function() {
             var banner = document.getElementById('downloadBanner');
             if (banner) {
@@ -566,7 +622,7 @@
                     closeBanner();
                 }, 500);
             }
-        }, 10000);
+        }, 15000);
     </script>
 </body>
 </html>
