@@ -47,16 +47,21 @@ class IntelligenceFoundry {
         // Smooth scroll for navigation links
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                const href = link.getAttribute('href');
                 
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                // Only prevent default for anchor links (starting with #)
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
+                // For external links (.html files), let the browser handle them normally
 
                 // Close mobile menu
                 navLinks.classList.remove('active');
