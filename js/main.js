@@ -110,17 +110,19 @@ class IntelligenceFoundry {
             {
                 title: 'NLP Model Fine-Tuning SaaS Platform',
                 category: 'AI Engineering',
-                description: 'Production platform for ML teams to fine-tune language models using Haystack framework. Built 20+ REST API endpoints for document management, QA, and training workflows.',
-                technologies: ['Django', 'Haystack', 'PyTorch', 'Celery', 'Redis', 'Elasticsearch', 'AWS EC2', 'Docker'],
+                description: 'Production SaaS platform for NLP Question Answering built at UBIAI startup. Implemented QA system using Haystack framework with BM25 Retriever and FARM Reader models. Built 20+ REST API endpoints for document management, QA workflows, and active learning. Supports SQuAD and CoQA datasets.',
+                technologies: ['Django', 'DRF', 'Haystack', 'BM25', 'FARM', 'PyTorch', 'Celery', 'Elasticsearch', 'Milvus', 'Redis', 'PostgreSQL', 'AWS EC2', 'Docker'],
                 achievements: [
                     '30% improvement in ML workflow efficiency',
-                    'Integrated BM25 retrieval with FARM reader models',
-                    'Active learning workflows for iterative fine-tuning',
-                    '25% reduction in deployment time with CI/CD'
+                    '20+ REST API endpoints for document QA',
+                    'BM25 Retriever + FARM Reader integration',
+                    'SQuAD & CoQA dataset support',
+                    'Milvus/FAISS vector search implementation',
+                    'Active learning workflows for model fine-tuning'
                 ],
                 status: 'production',
                 github: null,
-                live: null
+                live: 'https://www.kaggle.com/bilelnasri'
             },
             {
                 title: 'Real-Time Sales Analytics Dashboard',
