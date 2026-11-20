@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilel Nasri - Professional CV</title>
+    <style>
+        @media print {
+            body { margin: 0; padding: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #ffffff;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #3498db;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            font-size: 11px;
+            color: #7f8c8d;
+            line-height: 1.8;
+        }
+        
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        h2 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #3498db;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 14px;
+            color: #2c3e50;
+            margin: 15px 0 8px 0;
+            font-weight: 600;
+        }
+        
+        h4 {
+            font-size: 13px;
+            color: #3498db;
+            margin: 10px 0 5px 0;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 10px;
+            font-size: 11px;
+            text-align: justify;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+        
+        .job-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .job-date {
+            font-size: 10px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .company {
+            font-size: 12px;
+            color: #3498db;
+            margin-bottom: 8px;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        li {
+            font-size: 11px;
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-category {
+            font-size: 11px;
+        }
+        
+        .skill-category strong {
+            color: #3498db;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .highlight {
+            background: #e8f4f8;
+            padding: 10px;
+            border-left: 3px solid #3498db;
+            margin: 10px 0;
+            font-size: 11px;
+        }
+        
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .metric {
+            font-size: 11px;
+        }
+        
+        .metric strong {
+            color: #27ae60;
+            font-weight: 700;
+        }
+        
+        .tech-stack {
+            font-size: 10px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .project-link {
+            font-size: 10px;
+            color: #3498db;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 3px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .cert-item {
+            font-size: 11px;
+            padding: 5px;
+            background: #f8f9fa;
+            border-radius: 3px;
+        }
+        
+        .cert-item strong {
+            color: #3498db;
+        }
+        
+        .download-btn {
+            background: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>BILEL NASRI</h1>
+        <div class="subtitle">Data Engineer | AI Engineer | Distributed Systems Architect</div>
+        <div class="contact-info">
+            <strong>Email:</strong> binasri1991@gmail.com | 
+            <strong>Phone:</strong> +216 96 321 618 | 
+            <strong>Location:</strong> Tunisia (Remote Worldwide)<br>
+            <strong>Portfolio:</strong> <a href="https://biso1991.github.io/intelligence-foundry/">biso1991.github.io/intelligence-foundry</a> | 
+            <strong>GitHub:</strong> <a href="https://github.com/biso1991">github.com/biso1991</a> | 
+            <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bilel-n-2b9ba8215/">linkedin.com/in/bilel-n-2b9ba8215</a>
+        </div>
+    </div>
+
+    <!-- Professional Summary -->
+    <div class="section">
+        <h2>Professional Summary</h2>
+        <p>
+            Senior Data Engineer and AI Engineer with <strong>4+ years of proven freelance experience</strong> building production-grade 
+            distributed systems, real-time data pipelines, and AI-powered applications. Specialized in <strong>Kafka-based architectures</strong>, 
+            <strong>LLM/RAG systems</strong>, and <strong>high-performance APIs</strong> serving thousands of requests. Expert in designing 
+            fault-tolerant systems with comprehensive observability.
+        </p>
+        <div class="metrics">
+            <div class="metric"><strong>✓ 30% improvement</strong> in ML workflow efficiency</div>
+            <div class="metric"><strong>✓ 25% reduction</strong> in deployment time</div>
+            <div class="metric"><strong>✓ 99.9% uptime</strong> for production APIs</div>
+            <div class="metric"><strong>✓ $0/month</strong> infrastructure costs</div>
+        </div>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="section">
+        <h2>Core Competencies</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <strong>Data Engineering</strong>
+                Apache Kafka (Consumer Groups, DLQ) • Apache Airflow (DAGs, XCom) • Apache Spark/PySpark • PostgreSQL • MongoDB • Redis • Elasticsearch • ETL/ELT • Real-Time Processing
+            </div>
+            <div class="skill-category">
+                <strong>AI & Machine Learning</strong>
+                LangChain • LangGraph • RAG • GPT/LLaMA • BERT/RoBERTa • PyTorch • TensorFlow • NLP • MLOps (MLflow, W&B) • Model Fine-Tuning
+            </div>
+            <div class="skill-category">
+                <strong>Production Systems</strong>
+                FastAPI (Advanced) • Django/DRF (Expert) • Docker • Kubernetes • Prometheus • Grafana • Jaeger • REST API • Microservices
+            </div>
+            <div class="skill-category">
+                <strong>Cloud & DevOps</strong>
+                AWS (Lambda, DynamoDB, SQS, Glue) • GCP (BigQuery) • GitHub Actions • CI/CD • Linux • Git • Terraform
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Experience -->
+    <div class="section">
+        <h2>Professional Experience</h2>
+        
+        <!-- Freelance -->
+        <div class="job-header">
+            <div>
+                <div class="job-title">Data Engineer | AI Engineer — Freelance</div>
+                <div class="company">Remote</div>
+            </div>
+            <div class="job-date">Nov 2022 – Present</div>
+        </div>
+
+        <h4>🎯 Distributed Data Acquisition & Influencer Intelligence Platform</h4>
+        <p>Architected enterprise-grade distributed platform with Kafka orchestration and comprehensive observability for influencer marketing intelligence.</p>
+        <ul>
+            <li>Designed <strong>Kafka-based distributed pipeline</strong> with worker pools, job prioritization, and dead-letter queue handling</li>
+            <li>Implemented <strong>cross-process session synchronization</strong> using asyncio and fcntl file locks</li>
+            <li>Achieved <strong>12/12 passing concurrent tests</strong> validating distributed state management</li>
+            <li>Built <strong>Redis-based job orchestration</strong> supporting idempotent operations and graceful shutdown</li>
+            <li>Integrated <strong>full observability stack</strong>: Prometheus, Grafana, Jaeger, Loki with distributed tracing</li>
+        </ul>
+        <div class="tech-stack">Tech: FastAPI, Apache Kafka, Redis, Docker, Playwright, PostgreSQL, Pytest</div>
+
+        <h4>📊 Real-Time E-Commerce Analytics Dashboard</h4>
+        <p>Built streaming ETL pipeline with sub-second latency and live WebSocket dashboard for business intelligence.</p>
+        <ul>
+            <li>Designed <strong>Airflow-orchestrated ETL pipeline</strong> with Kafka and Spark for real-time processing</li>
+            <li>Integrated with <strong>Hadoop/YARN clusters</strong> for distributed batch jobs</li>
+            <li>Developed <strong>WebSocket-based dashboard</strong> for live revenue and inventory monitoring</li>
+            <li>Achieved <strong>&lt;1 second latency</strong> from event to visualization</li>
+        </ul>
+        <div class="tech-stack">Tech: Django, Apache Airflow, Kafka, Spark, Hadoop, PostgreSQL, Redis, Docker</div>
+        <a href="https://gitlab.com/bisonasri1991/ecommerce" class="project-link">🔗 View Project</a>
+
+        <h4>🌾 Agricultural E-Commerce Marketplace</h4>
+        <p>Built full-stack marketplace with NLP-powered search and real-time messaging.</p>
+        <ul>
+            <li>Built <strong>RESTful APIs</strong> with Django REST Framework and comprehensive authentication</li>
+            <li>Implemented <strong>NLP-based product search</strong> using spaCy for semantic matching</li>
+            <li>Added <strong>Redis caching layer</strong> reducing database queries by 60%</li>
+            <li>Developed <strong>WebSocket real-time messaging</strong> for buyer-seller communication</li>
+        </ul>
+        <div class="tech-stack">Tech: Django (DRF), PostgreSQL, Redis, WebSockets, Docker, spaCy</div>
+        <a href="https://github.com/biso1991/agri_connect" class="project-link">🔗 View Project</a>
+
+        <h4>📱 Social Media & E-Commerce Marketing</h4>
+        <ul>
+            <li>Managed <strong>Facebook and TikTok</strong> accounts with 10,000+ combined reach</li>
+            <li>Planned paid advertising campaigns achieving <strong>15% conversion rate</strong></li>
+            <li>Created product content using AI-powered creative tools</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- UbiAI Experience -->
+    <div class="section">
+        <div class="job-header">
+            <div>
+                <div class="job-title">Data Scientist | AI Engineer — UbiAI</div>
+                <div class="company">Tunisia</div>
+            </div>
+            <div class="job-date">Feb 2022 – Oct 2022</div>
+        </div>
+
+        <h4>🤖 AI-Powered Influencer Marketing Intelligence System</h4>
+        <p>Developed multi-agent LLM system with RAG pipeline for contextual insights and campaign optimization.</p>
+        <ul>
+            <li>Implemented <strong>multi-agent LLM system</strong> using LangChain and LangGraph</li>
+            <li>Built <strong>RAG pipeline</strong> retrieving relevant context from 10,000+ documents</li>
+            <li>Developed <strong>sentiment analysis</strong> using BERT/RoBERTa with 92% accuracy</li>
+            <li>Designed <strong>serverless architecture</strong> on AWS (Lambda, DynamoDB, SQS, Glue)</li>
+            <li>Achieved <strong>30% improvement in ML workflow efficiency</strong></li>
+        </ul>
+        <div class="tech-stack">Tech: GPT, LLaMA, LangChain, LangGraph, BERT, RAG, AWS Lambda, DynamoDB, Elasticsearch, FastAPI</div>
+
+        <h4>🔧 NLP Model Fine-Tuning SaaS Platform</h4>
+        <p>Built end-to-end SaaS platform with automated training and model management.</p>
+        <ul>
+            <li>Developed <strong>full SaaS platform</strong> for NLP model training and deployment using Haystack</li>
+            <li>Implemented <strong>asynchronous task processing</strong> with Celery and Redis</li>
+            <li>Integrated <strong>Elasticsearch</strong> for model versioning and search capabilities</li>
+            <li>Achieved <strong>30% workflow efficiency improvement</strong></li>
+        </ul>
+        <div class="tech-stack">Tech: Django, DRF, Haystack, PyTorch, Celery, Redis, Elasticsearch, PostgreSQL, Docker</div>
+
+        <h4>🚀 CI/CD Pipeline Automation</h4>
+        <ul>
+            <li>Developed <strong>GitHub Actions workflows</strong> with 4 automated linters (pylint, flake8, black, mypy)</li>
+            <li>Created <strong>multi-stage Docker builds</strong> reducing image size by 40%</li>
+            <li>Achieved <strong>25% reduction in deployment time</strong></li>
+        </ul>
+    </div>
+
+    <!-- Contract Work -->
+    <div class="section">
+        <div class="job-header">
+            <div>
+                <div class="job-title">Junior Data Engineer — Contract Work</div>
+                <div class="company">Remote</div>
+            </div>
+            <div class="job-date">Nov 2021 – Jan 2022</div>
+        </div>
+        <ul>
+            <li>Developed ETL workflows for data migration projects</li>
+            <li>Built web scraping solutions using BeautifulSoup and Selenium</li>
+            <li>Created data integration pipelines connecting multiple data sources</li>
+        </ul>
+    </div>
+
+    <!-- Production Projects -->
+    <div class="section">
+        <h2>Production Projects (Live)</h2>
+        
+        <h4>🔍 Data Intelligence Platform — 3 Production APIs <span class="status-badge">LIVE</span></h4>
+        <div class="metrics">
+            <div class="metric"><strong>1,942 IP addresses</strong> with location intelligence</div>
+            <div class="metric"><strong>21 countries</strong> web data coverage</div>
+            <div class="metric"><strong>99.9% uptime</strong> over 6 months</div>
+            <div class="metric"><strong>$0/month cost</strong></div>
+        </div>
+        <div class="tech-stack">Tech: FastAPI, PostgreSQL, Docker, Render, Cloudflare Pages</div>
+        <a href="https://github.com/biso1991/data-intelligence-platform" class="project-link">🔗 GitHub</a> | 
+        <a href="https://ip-intelligence-api-yaov.onrender.com/" class="project-link">🔗 Live Demo</a>
+
+        <h4>🔄 Apache Airflow Data Scraping Pipeline</h4>
+        <ul>
+            <li><strong>5-task DAG</strong> with XCom data flow and retry logic</li>
+            <li><strong>Idempotent UPSERT operations</strong> for data consistency</li>
+            <li><strong>481-line test suite</strong> achieving 85% coverage</li>
+        </ul>
+        <div class="tech-stack">Tech: Apache Airflow 2.10.5, PostgreSQL, Docker Compose, pytest</div>
+        <a href="https://github.com/biso1991/airflow-data-scraping-pipeline" class="project-link">🔗 GitHub</a>
+    </div>
+
+    <!-- Certifications -->
+    <div class="section">
+        <h2>Technical Certifications</h2>
+        <div class="cert-grid">
+            <div class="cert-item">
+                <strong>LFCS</strong><br>
+                Linux Foundation Certified System Administrator
+            </div>
+            <div class="cert-item">
+                <strong>Big Data Engineer 2021</strong><br>
+                IBM
+            </div>
+            <div class="cert-item">
+                <strong>Google Data Analytics</strong><br>
+                Coursera
+            </div>
+            <div class="cert-item">
+                <strong>Machine Learning</strong><br>
+                Udemy (Basic to Advanced)
+            </div>
+        </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+        <h2>Education</h2>
+        <h3>Big Data & Business Intelligence | Iteam University, Tunis | 2020 – 2022</h3>
+        <p>Focus: Data warehousing, ETL design, business analytics, data visualization</p>
+        
+        <h3>Computer Science | TekUp University, Ariana | 2019 – 2020</h3>
+        <p>Focus: Algorithms, data structures, software engineering</p>
+        
+        <h3>License in Electrical Engineering | ISET Béja | 2015 – 2018</h3>
+        <p>Focus: Electronics, embedded systems, automation</p>
+    </div>
+
+    <!-- Languages -->
+    <div class="section">
+        <h2>Languages</h2>
+        <p><strong>Arabic:</strong> Native | <strong>English:</strong> Professional Working Proficiency | <strong>French:</strong> Professional Working Proficiency</p>
+    </div>
+
+    <!-- Availability -->
+    <div class="section">
+        <h2>Availability & Contact</h2>
+        <div class="highlight">
+            <strong>🟢 Available for Freelance Projects</strong><br>
+            <strong>Rate:</strong> $60-90/hour (negotiable) | 
+            <strong>Availability:</strong> 30-40 hours/week | 
+            <strong>Response Time:</strong> &lt;24 hours<br>
+            <strong>Time Zone:</strong> GMT+1 (Tunisia) — Flexible for US/EU clients<br>
+            <strong>Portfolio:</strong> <a href="https://biso1991.github.io/intelligence-foundry/">biso1991.github.io/intelligence-foundry</a>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 10px; color: #7f8c8d;">
+        <p><em>Last Updated: December 2024</em></p>
+        <p>This CV is also available in interactive format at: <a href="https://biso1991.github.io/intelligence-foundry/cv.html">biso1991.github.io/intelligence-foundry/cv.html</a></p>
+    </div>
+</body>
+</html>
