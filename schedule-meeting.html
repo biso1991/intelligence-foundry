@@ -328,6 +328,34 @@
             min-width: 320px;
             height: 700px;
         }
+        
+        /* Calendly wrapper with overlay Home button */
+        .calendly-wrapper {
+            position: relative;
+        }
+        
+        .calendly-home-button {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .calendly-home-button:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -555,9 +583,12 @@
                 </div>
 
                 <!-- Calendly Inline Widget -->
-                <div class="calendly-inline-widget" 
-                     data-url="https://calendly.com/bilelnasrinasri91"
-                     style="min-width:320px;height:700px;">
+                <div class="calendly-wrapper">
+                    <div class="calendly-inline-widget" 
+                         data-url="https://calendly.com/bilelnasrinasri91"
+                         style="min-width:320px;height:700px;">
+                    </div>
+                    <a href="index.html" class="calendly-home-button">🏠 Home</a>
                 </div>
                 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             </div>
