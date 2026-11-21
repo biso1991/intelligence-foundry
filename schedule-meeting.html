@@ -324,39 +324,6 @@
             min-height: 600px;
         }
 
-        .calendly-inline-widget {
-            min-width: 320px;
-            height: 700px;
-        }
-        
-        /* Calendly wrapper with overlay Home button */
-        .calendly-wrapper {
-            position: relative;
-        }
-        
-        .calendly-home-button {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .calendly-home-button:hover {
-            transform: translateX(-50%) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .meeting-types-grid {
@@ -398,7 +365,7 @@
         <!-- Meeting Types -->
         <div class="meeting-types-grid">
             <!-- Quick Consultation -->
-            <a href="https://calendly.com/bilelnasrinasri91/quick-consultation" target="_blank" class="meeting-card" style="text-decoration: none; color: inherit; display: block;">
+            <div class="meeting-card" onclick="openScheduler('quick-consultation')" style="cursor: pointer;">
                 <div class="meeting-icon">💬</div>
                 <h3 class="meeting-title">Quick Consultation</h3>
                 <div class="meeting-duration">
@@ -419,10 +386,10 @@
                     <li>Google Meet video call</li>
                 </ul>
                 <button class="btn">Schedule 15-min Call</button>
-            </a>
+            </div>
 
             <!-- Technical Deep Dive -->
-            <a href="https://calendly.com/bilelnasrinasri91/technical-deep-dive" target="_blank" class="meeting-card" style="text-decoration: none; color: inherit; display: block;">
+            <div class="meeting-card" onclick="openScheduler('technical-deep-dive')" style="cursor: pointer;">
                 <div class="meeting-icon">🔧</div>
                 <h3 class="meeting-title">Technical Deep Dive</h3>
                 <div class="meeting-duration">
@@ -443,10 +410,10 @@
                     <li>Live demo of similar projects</li>
                 </ul>
                 <button class="btn">Schedule 30-min Call</button>
-            </a>
+            </div>
 
             <!-- Project Discovery -->
-            <a href="https://calendly.com/bilelnasrinasri91/30min" target="_blank" class="meeting-card" style="text-decoration: none; color: inherit; display: block;">
+            <div class="meeting-card" onclick="openScheduler('project-discovery')" style="cursor: pointer;">
                 <div class="meeting-icon">🚀</div>
                 <h3 class="meeting-title">Project Discovery Session</h3>
                 <div class="meeting-duration">
@@ -468,7 +435,7 @@
                     <li>Risk assessment</li>
                 </ul>
                 <button class="btn">Schedule 60-min Call</button>
-            </a>
+            </div>
         </div>
 
         <!-- Contact Section -->
@@ -530,12 +497,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modal-title">Schedule Your Meeting</h2>
-                <div style="display: flex; gap: 0.5rem; align-items: center;">
-                    <a href="index.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                        🏠 Home
-                    </a>
-                    <button class="modal-close" onclick="closeScheduler()">×</button>
-                </div>
+                <button class="modal-close" onclick="closeScheduler()">×</button>
             </div>
             <div class="modal-body">
                 <!-- Instructions for manual booking -->
@@ -553,12 +515,6 @@
                         I typically respond within 24 hours and will send you a Google Meet link.
                     </p>
                     
-                    <div style="margin-top: 2rem; margin-bottom: 2rem; text-align: center;">
-                        <a href="index.html" class="btn" style="background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; display: inline-block;">
-                            🏠 Home
-                        </a>
-                    </div>
-                    
                     <div style="margin-top: 2rem;">
                         <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Alternative Options:</h4>
                         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -571,26 +527,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Home Button Banner Above Calendly -->
-                <div style="background: linear-gradient(135deg, #00d4ff15 0%, #8b5cf615 100%); border: 2px solid #00d4ff; border-radius: 12px; padding: 1.5rem; margin: 2rem 1rem; text-align: center;">
-                    <p style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem;">
-                        👇 Schedule directly below, or return to portfolio
-                    </p>
-                    <a href="index.html" class="btn" style="background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; display: inline-block; padding: 0.75rem 2rem;">
-                        🏠 Back to Home
-                    </a>
-                </div>
-
-                <!-- Calendly Inline Widget -->
-                <div class="calendly-wrapper">
-                    <div class="calendly-inline-widget" 
-                         data-url="https://calendly.com/bilelnasrinasri91"
-                         style="min-width:320px;height:700px;">
-                    </div>
-                    <a href="index.html" class="calendly-home-button">🏠 Home</a>
-                </div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             </div>
         </div>
     </div>
