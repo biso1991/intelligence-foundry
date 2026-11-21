@@ -1214,5 +1214,5 @@ if (typeof module !== 'undefined' && module.exports) {
     }
 }
 
-// ES6 module exports for browser
-export { intelligencePlatform, validateArchitecture };
+// ES6 exports already declared inline above (line 11 and line 1131)
+// No need for duplicate export statement
