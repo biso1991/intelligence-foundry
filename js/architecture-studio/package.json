@@ -2,5 +2,16 @@
   "name": "architecture-studio",
   "version": "1.0.0",
   "type": "module",
-  "description": "Interactive System Architecture Studio for Intelligence Platform"
+  "description": "Interactive System Architecture Studio for Intelligence Platform",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "validate": "node architectures/validate.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@axe-core/playwright": "^4.8.0"
+  }
 }
