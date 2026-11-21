@@ -215,7 +215,7 @@ export const intelligencePlatform = {
                 title: 'REST API Ingestion',
                 description: 'Pull data from external REST APIs',
                 technologies: ['Python requests', 'aiohttp', 'httpx'],
-                experience: 'UBIAI Internship/PFE: Integrated 20+ REST APIs for document management'
+                experience: 'UBIAI Internship/PFE: Integrated REST APIs for document management'
             },
             details: {
                 why: 'Standard HTTP-based integration. Most services provide REST APIs.',
@@ -243,7 +243,7 @@ export const intelligencePlatform = {
                 title: 'Apache Airflow',
                 description: 'Workflow orchestration for batch processing',
                 technologies: ['Airflow 2.10.5', 'DAGs', 'XCom'],
-                experience: 'Built 5-task DAG with XCom data flow, achieved 85% test coverage'
+                experience: 'Built 5-task DAG with XCom data flow and comprehensive test suite'
             },
             details: {
                 why: 'DAG-based orchestration for complex workflows. Built-in retry logic, backfilling, and monitoring UI.',
@@ -268,7 +268,7 @@ export const intelligencePlatform = {
                 title: 'Apache Spark Streaming',
                 description: 'Real-time stream processing with micro-batches',
                 technologies: ['PySpark', 'Structured Streaming', 'Checkpoints'],
-                experience: 'E-commerce: Real-time aggregations with sub-second latency'
+                experience: 'E-commerce: Real-time aggregations with Spark Streaming'
             },
             details: {
                 why: 'Unified API for batch and streaming. Structured Streaming provides SQL-like operations on streams.',
@@ -1021,7 +1021,7 @@ export const intelligencePlatform = {
         streaming: {
             id: 'streaming',
             name: 'Real-Time Streaming',
-            description: 'Kafka + Spark Streaming for sub-second latency',
+            description: 'Kafka + Spark Streaming for real-time processing',
             activeNodes: [
                 'web-scraping', 'iot-sensors', 'kafka', 'spark-streaming',
                 'lakehouse-bronze', 'postgresql', 'redis', 'fastapi'
@@ -1082,7 +1082,7 @@ export const intelligencePlatform = {
             metrics: {
                 'Datasets': 'SQuAD, CoQA',
                 'Technologies': 'Haystack, BM25, FARM, Milvus, FastAPI',
-                'APIs': '20+ REST endpoints',
+                'APIs': 'REST API endpoints',
                 'Employment': 'UBIAI Internship/PFE (Feb-Oct 2022)'
             }
         },
@@ -1097,7 +1097,7 @@ export const intelligencePlatform = {
                 'postgresql', 'redis', 'docker'
             ],
             metrics: {
-                'Latency': 'Sub-second end-to-end processing',
+                'Latency': 'Real-time end-to-end processing',
                 'Technologies': 'Kafka, Spark Streaming, Airflow, Hadoop',
                 'Components': 'Batch + Streaming (Lambda Architecture)'
             }

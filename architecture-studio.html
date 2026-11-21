@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture Studio | Bilel Nasri - Intelligence Foundry</title>
+    <meta name="description" content="Interactive visualization of Intelligence Platform architecture - from data ingestion to production AI systems">
+    
+    <!-- Design System -->
+    <link rel="stylesheet" href="css/design-tokens.css?v=2.0.0">
+    <link rel="stylesheet" href="css/animations.css?v=2.0.0">
+    <link rel="stylesheet" href="css/components.css?v=2.0.0">
+    
+    <style>
+        /* === ARCHITECTURE STUDIO STYLES === */
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .studio-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+        
+        /* Header */
+        .studio-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .studio-title {
+            font-size: var(--text-5xl);
+            font-weight: var(--font-bold);
+            background: linear-gradient(135deg, var(--flow-cyan) 0%, var(--flow-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-3);
+        }
+        
+        .studio-subtitle {
+            font-size: var(--text-xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-6);
+        }
+        
+        .studio-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-8);
+            flex-wrap: wrap;
+            margin-top: var(--space-6);
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+        }
+        
+        .stat-value {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            color: var(--accent-primary);
+        }
+        
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Scenario Controls */
+        .scenario-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-8);
+            padding: var(--space-6);
+            background: var(--bg-surface);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-medium);
+        }
+        
+        .scenario-btn {
+            padding: var(--space-3) var(--space-6);
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            transition: all var(--duration-base);
+            white-space: nowrap;
+        }
+        
+        .scenario-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        
+        .scenario-btn.active {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-6);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-6);
+            padding: var(--space-4);
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+        }
+        
+        .legend-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-icon.professional { background: var(--flow-green); }
+        .legend-icon.personal { background: var(--flow-cyan); }
+        .legend-icon.familiarity { background: var(--text-tertiary); }
+        
+        /* SVG Container */
+        .svg-container {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            overflow-x: auto;
+            margin-bottom: var(--space-8);
+        }
+        
+        #architecture-svg {
+            width: 100%;
+            height: auto;
+            min-height: 600px;
+        }
+        
+        /* SVG Elements */
+        .node-group {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .node-group.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .node-circle {
+            transition: all 0.2s ease;
+        }
+        
+        .node-group:hover .node-circle {
+            stroke-width: 3;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+        
+        .node-label {
+            font-size: 12px;
+            fill: var(--text-primary);
+            text-anchor: middle;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        .node-icon {
+            font-size: 20px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        .connection-line {
+            transition: all 0.2s ease;
+        }
+        
+        .connection-line.hidden {
+            opacity: 0;
+        }
+        
+        .connection-line.streaming {
+            stroke-dasharray: 8 4;
+        }
+        
+        .connection-line.lookup {
+            stroke-dasharray: 2 3;
+        }
+        
+        .connection-line.telemetry {
+            stroke-width: 1;
+            opacity: 0.4;
+        }
+        
+        .connection-line.deployment {
+            stroke-width: 3;
+        }
+        
+        .layer-label {
+            font-size: 14px;
+            font-weight: var(--font-semibold);
+            fill: var(--text-tertiary);
+            text-anchor: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .studio-title {
+                font-size: var(--text-3xl);
+            }
+            
+            .studio-subtitle {
+                font-size: var(--text-base);
+            }
+            
+            .scenario-controls {
+                flex-direction: column;
+            }
+            
+            .scenario-btn {
+                width: 100%;
+            }
+            
+            .svg-container {
+                padding: var(--space-3);
+            }
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: var(--space-16);
+            color: var(--text-secondary);
+        }
+        
+        .loading-spinner {
+            border: 3px solid var(--border-medium);
+            border-top: 3px solid var(--accent-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--space-4);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="studio-container">
+        <!-- Header -->
+        <header class="studio-header">
+            <h1 class="studio-title">System Architecture Studio</h1>
+            <p class="studio-subtitle">Intelligence Platform — From Data to AI</p>
+            
+            <div class="studio-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-nodes">36</div>
+                    <div class="stat-label">Components</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-connections">37</div>
+                    <div class="stat-label">Connections</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-layers">8</div>
+                    <div class="stat-label">Layers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="stat-scenarios">5</div>
+                    <div class="stat-label">Scenarios</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Scenario Controls -->
+        <div class="scenario-controls" id="scenario-controls">
+            <!-- Dynamically populated -->
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-icon professional"></div>
+                <span>Professional (UBIAI Internship)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon personal"></div>
+                <span>Personal Projects</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon familiarity"></div>
+                <span>Architecture Familiarity</span>
+            </div>
+        </div>
+        
+        <!-- SVG Visualization -->
+        <div class="svg-container">
+            <svg id="architecture-svg" viewBox="0 0 2000 700" preserveAspectRatio="xMidYMid meet">
+                <!-- Dynamically populated -->
+            </svg>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading architecture configuration...</p>
+        </div>
+    </div>
+    
+    <!-- Architecture Configuration -->
+    <script type="module">
+        import { intelligencePlatform, validateArchitecture } from './js/architecture-studio/architectures/intelligence-platform.js';
+        
+        // Validate configuration
+        const validation = validateArchitecture(intelligencePlatform);
+        if (!validation.valid) {
+            console.error('Architecture validation failed:', validation.errors);
+            document.getElementById('loading').innerHTML = `
+                <h2 style="color: var(--error)">Configuration Error</h2>
+                <p>${validation.errors.join('<br>')}</p>
+            `;
+            throw new Error('Invalid architecture configuration');
+        }
+        
+        console.log('✅ Architecture validation passed:', validation.counts);
+        
+        // Hide loading
+        document.getElementById('loading').style.display = 'none';
+        
+        // === CONFIGURATION ===
+        const LAYER_WIDTH = 240;
+        const LAYER_PADDING = 20;
+        const NODE_VERTICAL_SPACING = 80;
+        const LAYER_START_X = 50;
+        const LAYER_START_Y = 80;
+        
+        const LAYER_ORDER = ['sources', 'ingestion', 'processing', 'storage', 'ml', 'ai', 'production', 'observability'];
+        
+        const EXPERIENCE_COLORS = {
+            'professional': '#10b981',       // Green (UBIAI)
+            'personal-project': '#00d4ff',   // Cyan (Personal)
+            'architecture-familiarity': '#64748b' // Gray (Familiarity)
+        };
+        
+        // === LAYOUT CALCULATION ===
+        function calculateNodePositions(nodes) {
+            const nodesByLayer = {};
+            
+            // Group nodes by layer
+            nodes.forEach(node => {
+                if (!nodesByLayer[node.layer]) {
+                    nodesByLayer[node.layer] = [];
+                }
+                nodesByLayer[node.layer].push(node);
+            });
+            
+            // Calculate positions
+            const positions = new Map();
+            
+            LAYER_ORDER.forEach((layer, layerIndex) => {
+                const layerNodes = nodesByLayer[layer] || [];
+                const layerX = LAYER_START_X + (layerIndex * LAYER_WIDTH);
+                
+                layerNodes.forEach((node, nodeIndex) => {
+                    const y = LAYER_START_Y + (nodeIndex * NODE_VERTICAL_SPACING);
+                    positions.set(node.id, { x: layerX, y: y });
+                });
+            });
+            
+            return positions;
+        }
+        
+        // === SVG RENDERING ===
+        const svg = document.getElementById('architecture-svg');
+        const positions = calculateNodePositions(intelligencePlatform.nodes);
+        
+        // Store references for scenario filtering
+        const nodeElements = new Map();
+        const connectionElements = new Map();
+        
+        // Render connections first (so they appear behind nodes)
+        function renderConnections() {
+            const connectionsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            connectionsGroup.id = 'connections-layer';
+            
+            intelligencePlatform.connections.forEach((conn, index) => {
+                const fromPos = positions.get(conn.from);
+                const toPos = positions.get(conn.to);
+                
+                if (!fromPos || !toPos) {
+                    console.warn(`Missing position for connection: ${conn.from} -> ${conn.to}`);
+                    return;
+                }
+                
+                // Calculate curve control points
+                const dx = toPos.x - fromPos.x;
+                const dy = toPos.y - fromPos.y;
+                const cx1 = fromPos.x + dx * 0.5;
+                const cy1 = fromPos.y;
+                const cx2 = fromPos.x + dx * 0.5;
+                const cy2 = toPos.y;
+                
+                // Create path
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${fromPos.x} ${fromPos.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${toPos.x} ${toPos.y}`);
+                path.setAttribute('stroke', '#3b82f6');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('opacity', '0.3');
+                path.classList.add('connection-line', conn.type);
+                path.id = `conn-${conn.from}-${conn.to}`;
+                
+                connectionsGroup.appendChild(path);
+                connectionElements.set(`${conn.from}-${conn.to}`, path);
+            });
+            
+            svg.appendChild(connectionsGroup);
+        }
+        
+        // Render layer labels
+        function renderLayerLabels() {
+            const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            labelsGroup.id = 'layer-labels';
+            
+            LAYER_ORDER.forEach((layer, index) => {
+                const x = LAYER_START_X + (index * LAYER_WIDTH);
+                const y = 30;
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', x);
+                text.setAttribute('y', y);
+                text.classList.add('layer-label');
+                text.textContent = layer;
+                
+                labelsGroup.appendChild(text);
+            });
+            
+            svg.appendChild(labelsGroup);
+        }
+        
+        // Render nodes
+        function renderNodes() {
+            const nodesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            nodesGroup.id = 'nodes-layer';
+            
+            intelligencePlatform.nodes.forEach(node => {
+                const pos = positions.get(node.id);
+                if (!pos) {
+                    console.warn(`Missing position for node: ${node.id}`);
+                    return;
+                }
+                
+                // Create group for node
+                const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                group.classList.add('node-group');
+                group.id = `node-${node.id}`;
+                group.setAttribute('data-experience', node.experience);
+                
+                // Circle
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', pos.x);
+                circle.setAttribute('cy', pos.y);
+                circle.setAttribute('r', node.size || 30);
+                circle.setAttribute('fill', node.color || EXPERIENCE_COLORS[node.experience]);
+                circle.setAttribute('stroke', EXPERIENCE_COLORS[node.experience]);
+                circle.setAttribute('stroke-width', '2');
+                circle.setAttribute('opacity', '0.8');
+                circle.classList.add('node-circle');
+                
+                // Icon
+                const icon = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                icon.setAttribute('x', pos.x);
+                icon.setAttribute('y', pos.y + 2);
+                icon.classList.add('node-icon');
+                icon.textContent = node.icon || '⚙';
+                
+                // Label (below node)
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', pos.x);
+                label.setAttribute('y', pos.y + (node.size || 30) + 20);
+                label.classList.add('node-label');
+                label.textContent = node.name;
+                
+                group.appendChild(circle);
+                group.appendChild(icon);
+                group.appendChild(label);
+                
+                nodesGroup.appendChild(group);
+                nodeElements.set(node.id, group);
+            });
+            
+            svg.appendChild(nodesGroup);
+        }
+        
+        // === SCENARIO SWITCHING ===
+        function renderScenarioControls() {
+            const controls = document.getElementById('scenario-controls');
+            
+            Object.entries(intelligencePlatform.scenarios).forEach(([key, scenario]) => {
+                const button = document.createElement('button');
+                button.classList.add('scenario-btn');
+                button.textContent = scenario.name;
+                button.dataset.scenario = key;
+                
+                if (key === 'complete') {
+                    button.classList.add('active');
+                }
+                
+                button.addEventListener('click', () => {
+                    // Update active button
+                    document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Apply scenario
+                    activateScenario(key);
+                });
+                
+                controls.appendChild(button);
+            });
+        }
+        
+        function activateScenario(scenarioKey) {
+            const scenario = intelligencePlatform.scenarios[scenarioKey];
+            
+            // Determine active nodes
+            const activeNodes = scenario.activeNodes === 'all'
+                ? new Set(intelligencePlatform.nodes.map(n => n.id))
+                : new Set(scenario.activeNodes);
+            
+            // Show/hide nodes
+            intelligencePlatform.nodes.forEach(node => {
+                const element = nodeElements.get(node.id);
+                if (element) {
+                    if (activeNodes.has(node.id)) {
+                        element.classList.remove('hidden');
+                    } else {
+                        element.classList.add('hidden');
+                    }
+                }
+            });
+            
+            // Show/hide connections
+            intelligencePlatform.connections.forEach(conn => {
+                const element = connectionElements.get(`${conn.from}-${conn.to}`);
+                if (element) {
+                    const visible = activeNodes.has(conn.from) && activeNodes.has(conn.to);
+                    if (visible) {
+                        element.classList.remove('hidden');
+                    } else {
+                        element.classList.add('hidden');
+                    }
+                }
+            });
+            
+            console.log(`Activated scenario: ${scenario.name}`);
+        }
+        
+        // === INITIALIZATION ===
+        function init() {
+            renderLayerLabels();
+            renderConnections();
+            renderNodes();
+            renderScenarioControls();
+            
+            console.log('✅ Architecture Studio initialized');
+            console.log(`Rendered ${intelligencePlatform.nodes.length} nodes and ${intelligencePlatform.connections.length} connections`);
+        }
+        
+        init();
+    </script>
+</body>
+</html>
