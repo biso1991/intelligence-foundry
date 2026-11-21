@@ -157,12 +157,22 @@
             padding: var(--space-6);
             overflow-x: auto;
             margin-bottom: var(--space-8);
+            position: relative;
         }
         
         #architecture-svg {
             width: 100%;
             height: auto;
             min-height: 600px;
+        }
+        
+        /* Canvas Overlay */
+        #particle-canvas {
+            position: absolute;
+            top: var(--space-6);
+            left: var(--space-6);
+            pointer-events: none;
+            z-index: 1;
         }
         
         /* SVG Elements */
@@ -279,6 +289,49 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Animation Controls */
+        .animation-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+            padding: var(--space-4);
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .animation-btn {
+            padding: var(--space-2) var(--space-4);
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            transition: all var(--duration-base);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .animation-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+        }
+        
+        .animation-btn.active {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+        }
+        
+        .animation-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -329,8 +382,22 @@
             </div>
         </div>
         
+        <!-- Animation Controls -->
+        <div class="animation-controls">
+            <button class="animation-btn active" id="btn-play" aria-label="Play animation">
+                <span>▶</span> Play
+            </button>
+            <button class="animation-btn" id="btn-pause" aria-label="Pause animation">
+                <span>⏸</span> Pause
+            </button>
+            <button class="animation-btn" id="btn-replay" aria-label="Replay animation">
+                <span>↻</span> Replay
+            </button>
+        </div>
+        
         <!-- SVG Visualization -->
-        <div class="svg-container">
+        <div class="svg-container" id="viz-container">
+            <canvas id="particle-canvas"></canvas>
             <svg id="architecture-svg" viewBox="0 0 2000 700" preserveAspectRatio="xMidYMid meet">
                 <!-- Dynamically populated -->
             </svg>
@@ -603,6 +670,358 @@
         }
         
         init();
+        
+        // === CANVAS PARTICLE ANIMATION SYSTEM ===
+        
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const svg = document.getElementById('architecture-svg');
+        const container = document.getElementById('viz-container');
+        
+        // Animation state
+        let animationState = {
+            isPlaying: true,
+            isPaused: false,
+            animationFrameId: null,
+            particles: [],
+            lastTime: 0
+        };
+        
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        // Particle class
+        class Particle {
+            constructor(connection, positions) {
+                this.connection = connection;
+                this.fromPos = positions.get(connection.from);
+                this.toPos = positions.get(connection.to);
+                
+                if (!this.fromPos || !this.toPos) {
+                    this.valid = false;
+                    return;
+                }
+                
+                this.valid = true;
+                this.progress = Math.random(); // Random start position
+                this.speed = this.getSpeedForType(connection.type);
+                this.size = this.getSizeForType(connection.type);
+                this.color = this.getColorForType(connection.type);
+                this.opacity = 0.6;
+            }
+            
+            getSpeedForType(type) {
+                switch(type) {
+                    case 'streaming': return 0.008; // Fast (real-time)
+                    case 'batch': return 0.004;     // Medium (scheduled)
+                    case 'lookup': return 0.012;    // Very fast (queries)
+                    case 'telemetry': return 0.006; // Medium-fast (monitoring)
+                    case 'deployment': return 0.003; // Slow (deliberate)
+                    default: return 0.005;
+                }
+            }
+            
+            getSizeForType(type) {
+                switch(type) {
+                    case 'streaming': return 4;
+                    case 'batch': return 5;
+                    case 'lookup': return 3;
+                    case 'telemetry': return 2;
+                    case 'deployment': return 6;
+                    default: return 4;
+                }
+            }
+            
+            getColorForType(type) {
+                switch(type) {
+                    case 'streaming': return '#00d4ff'; // Cyan
+                    case 'batch': return '#8b5cf6';     // Purple
+                    case 'lookup': return '#10b981';    // Green
+                    case 'telemetry': return '#f59e0b'; // Amber
+                    case 'deployment': return '#3b82f6'; // Blue
+                    default: return '#00d4ff';
+                }
+            }
+            
+            update(deltaTime) {
+                if (!this.valid) return false;
+                
+                // Move along connection path
+                this.progress += this.speed * (deltaTime / 16); // Normalize to 60fps baseline
+                
+                // Reset when reaching end
+                if (this.progress >= 1) {
+                    this.progress = 0;
+                }
+                
+                return true;
+            }
+            
+            draw(ctx, dpr) {
+                if (!this.valid) return;
+                
+                // Calculate position along Bezier curve
+                const t = this.progress;
+                const t1 = 1 - t;
+                
+                // Control points for Bezier curve (matching SVG connections)
+                const dx = this.toPos.x - this.fromPos.x;
+                const cx1 = this.fromPos.x + dx * 0.5;
+                const cy1 = this.fromPos.y;
+                const cx2 = this.fromPos.x + dx * 0.5;
+                const cy2 = this.toPos.y;
+                
+                // Cubic Bezier formula
+                const x = Math.pow(t1, 3) * this.fromPos.x +
+                         3 * Math.pow(t1, 2) * t * cx1 +
+                         3 * t1 * Math.pow(t, 2) * cx2 +
+                         Math.pow(t, 3) * this.toPos.x;
+                         
+                const y = Math.pow(t1, 3) * this.fromPos.y +
+                         3 * Math.pow(t1, 2) * t * cy1 +
+                         3 * t1 * Math.pow(t, 2) * cy2 +
+                         Math.pow(t, 3) * this.toPos.y;
+                
+                // Draw particle
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                
+                // Glow effect
+                const gradient = ctx.createRadialGradient(x * dpr, y * dpr, 0, x * dpr, y * dpr, this.size * dpr * 2);
+                gradient.addColorStop(0, this.color);
+                gradient.addColorStop(0.5, this.color + '80');
+                gradient.addColorStop(1, this.color + '00');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(x * dpr, y * dpr, this.size * dpr * 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Core particle
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(x * dpr, y * dpr, this.size * dpr, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+        }
+        
+        // Setup canvas dimensions
+        function setupCanvas() {
+            const svgRect = svg.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            
+            // Set canvas size to match SVG
+            canvas.width = svgRect.width * dpr;
+            canvas.height = svgRect.height * dpr;
+            canvas.style.width = svgRect.width + 'px';
+            canvas.style.height = svgRect.height + 'px';
+            
+            // Scale context to match device pixel ratio
+            ctx.scale(dpr, dpr);
+        }
+        
+        // Initialize particles for active connections
+        function initializeParticles() {
+            animationState.particles = [];
+            
+            // Get active scenario
+            const activeScenarioBtn = document.querySelector('.scenario-btn.active');
+            const activeScenarioKey = activeScenarioBtn ? 
+                Object.keys(intelligencePlatform.scenarios).find(key => 
+                    intelligencePlatform.scenarios[key].name === activeScenarioBtn.textContent.trim()
+                ) : 'complete';
+            
+            const scenario = intelligencePlatform.scenarios[activeScenarioKey];
+            const activeNodes = scenario.activeNodes === 'all'
+                ? new Set(intelligencePlatform.nodes.map(n => n.id))
+                : new Set(scenario.activeNodes);
+            
+            // Create particles for visible connections
+            intelligencePlatform.connections.forEach(conn => {
+                // Only create particles for connections where both endpoints are visible
+                if (activeNodes.has(conn.from) && activeNodes.has(conn.to)) {
+                    // Particle density based on connection type
+                    const particleCount = getParticleCount(conn.type);
+                    
+                    for (let i = 0; i < particleCount; i++) {
+                        const particle = new Particle(conn, positions);
+                        if (particle.valid) {
+                            // Stagger particles along the connection
+                            particle.progress = i / particleCount;
+                            animationState.particles.push(particle);
+                        }
+                    }
+                }
+            });
+            
+            console.log(`Initialized ${animationState.particles.length} particles for scenario: ${activeScenarioKey}`);
+        }
+        
+        function getParticleCount(connectionType) {
+            switch(connectionType) {
+                case 'streaming': return 3;  // High traffic
+                case 'batch': return 2;       // Medium traffic
+                case 'lookup': return 4;      // Very high traffic
+                case 'telemetry': return 1;   // Low traffic
+                case 'deployment': return 1;  // Low traffic
+                default: return 2;
+            }
+        }
+        
+        // Animation loop
+        function animate(currentTime) {
+            if (!animationState.isPlaying) return;
+            
+            const deltaTime = currentTime - animationState.lastTime;
+            animationState.lastTime = currentTime;
+            
+            // Clear canvas
+            const dpr = window.devicePixelRatio || 1;
+            ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+            
+            // Update and draw particles
+            if (!animationState.isPaused) {
+                animationState.particles.forEach(particle => {
+                    particle.update(deltaTime);
+                    particle.draw(ctx, 1); // Pass 1 as dpr since we already scaled the context
+                });
+            } else {
+                // Still draw particles when paused, just don't update positions
+                animationState.particles.forEach(particle => {
+                    particle.draw(ctx, 1);
+                });
+            }
+            
+            animationState.animationFrameId = requestAnimationFrame(animate);
+        }
+        
+        // Animation controls
+        function startAnimation() {
+            if (animationState.isPlaying) return;
+            
+            animationState.isPlaying = true;
+            animationState.isPaused = false;
+            animationState.lastTime = performance.now();
+            animationState.animationFrameId = requestAnimationFrame(animate);
+            
+            updateControlButtons();
+        }
+        
+        function pauseAnimation() {
+            animationState.isPaused = true;
+            updateControlButtons();
+        }
+        
+        function resumeAnimation() {
+            animationState.isPaused = false;
+            animationState.lastTime = performance.now();
+            updateControlButtons();
+        }
+        
+        function replayAnimation() {
+            // Stop current animation
+            if (animationState.animationFrameId) {
+                cancelAnimationFrame(animationState.animationFrameId);
+            }
+            
+            // Reset state
+            animationState.isPlaying = false;
+            animationState.isPaused = false;
+            
+            // Re-initialize particles
+            initializeParticles();
+            
+            // Start fresh
+            startAnimation();
+        }
+        
+        function stopAnimation() {
+            animationState.isPlaying = false;
+            if (animationState.animationFrameId) {
+                cancelAnimationFrame(animationState.animationFrameId);
+                animationState.animationFrameId = null;
+            }
+        }
+        
+        function updateControlButtons() {
+            const playBtn = document.getElementById('btn-play');
+            const pauseBtn = document.getElementById('btn-pause');
+            
+            playBtn.classList.toggle('active', !animationState.isPaused && animationState.isPlaying);
+            pauseBtn.classList.toggle('active', animationState.isPaused);
+        }
+        
+        // Setup animation controls
+        document.getElementById('btn-play').addEventListener('click', () => {
+            if (animationState.isPaused) {
+                resumeAnimation();
+            } else {
+                startAnimation();
+            }
+        });
+        
+        document.getElementById('btn-pause').addEventListener('click', () => {
+            if (animationState.isPlaying && !animationState.isPaused) {
+                pauseAnimation();
+            }
+        });
+        
+        document.getElementById('btn-replay').addEventListener('click', () => {
+            replayAnimation();
+        });
+        
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                setupCanvas();
+                // Particles maintain their progress, just redraw at new size
+            }, 150);
+        });
+        
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Pause animation when tab is not visible
+                if (animationState.isPlaying && !animationState.isPaused) {
+                    animationState.isPaused = true;
+                }
+            } else {
+                // Resume animation when tab becomes visible
+                if (animationState.isPlaying && animationState.isPaused) {
+                    animationState.isPaused = false;
+                    animationState.lastTime = performance.now();
+                }
+            }
+        });
+        
+        // Override scenario switching to reinitialize particles
+        const originalActivateScenario = activateScenario;
+        activateScenario = function(scenarioKey) {
+            originalActivateScenario(scenarioKey);
+            
+            // Reinitialize particles for new scenario
+            if (animationState.isPlaying) {
+                stopAnimation();
+                initializeParticles();
+                startAnimation();
+            }
+        };
+        
+        // Initialize canvas and animation
+        setupCanvas();
+        
+        if (!prefersReducedMotion) {
+            initializeParticles();
+            startAnimation();
+        } else {
+            console.log('Animation disabled: user prefers reduced motion');
+            // Hide animation controls
+            document.querySelector('.animation-controls').style.display = 'none';
+        }
     </script>
 </body>
 </html>
