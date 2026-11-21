@@ -1213,3 +1213,6 @@ if (typeof module !== 'undefined' && module.exports) {
         process.exit(1);
     }
 }
+
+// ES6 module exports for browser
+export { intelligencePlatform, validateArchitecture };
