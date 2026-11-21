@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Meeting - Bilel Nasri | Data Engineer & AI Engineer</title>
+    <meta name="description" content="Book a consultation with Bilel Nasri - Expert in Data Engineering, AI, and Production Systems">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #00ff88;
+            --dark-bg: #0a0e1a;
+            --card-bg: #1a1f35;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #111827 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header-content {
+            margin-bottom: 3rem;
+        }
+
+        .profile-image-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .meeting-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .meeting-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #0f1419 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .meeting-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .meeting-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .meeting-card:hover::before {
+            opacity: 1;
+        }
+
+        .meeting-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .meeting-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .meeting-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .meeting-duration svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .meeting-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .meeting-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .meeting-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meeting-features li::before {
+            content: '✓';
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Modal for Calendly */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            min-height: 600px;
+        }
+
+        .calendly-inline-widget {
+            min-width: 320px;
+            height: 700px;
+        }
+        
+        /* Calendly wrapper with overlay Home button */
+        .calendly-wrapper {
+            position: relative;
+        }
+        
+        .calendly-home-button {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .calendly-home-button:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .meeting-types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            
+            <div class="header-content">
+                <div class="profile-image-container">
+                    <img src="images/profile-photo.png" alt="Bilel Nasri" class="profile-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%231a1f35%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%2300d4ff%22%3EBN%3C/text%3E%3C/svg%3E'">
+                </div>
+                <h1>Schedule a Meeting with Bilel Nasri</h1>
+                <p class="subtitle">Data Engineer • AI Engineer • Full-Stack Developer</p>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                    Book a consultation to discuss data engineering projects, AI systems, 
+                    production APIs, or collaboration opportunities.
+                </p>
+            </div>
+        </div>
+
+        <!-- Meeting Types -->
+        <div class="meeting-types-grid">
+            <!-- Quick Consultation -->
+            <div class="meeting-card" onclick="openScheduler('quick-consultation')">
+                <div class="meeting-icon">💬</div>
+                <h3 class="meeting-title">Quick Consultation</h3>
+                <div class="meeting-duration">
+                    <svg fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>
+                    <span>15 minutes</span>
+                </div>
+                <p class="meeting-description">
+                    A brief call to discuss your project needs, answer technical questions, 
+                    or explore potential collaboration opportunities.
+                </p>
+                <ul class="meeting-features">
+                    <li>Project scope discussion</li>
+                    <li>Technical feasibility review</li>
+                    <li>Quick Q&A session</li>
+                    <li>Google Meet video call</li>
+                </ul>
+                <button class="btn">Schedule 15-min Call</button>
+            </div>
+
+            <!-- Technical Deep Dive -->
+            <div class="meeting-card" onclick="openScheduler('technical-deep-dive')">
+                <div class="meeting-icon">🔧</div>
+                <h3 class="meeting-title">Technical Deep Dive</h3>
+                <div class="meeting-duration">
+                    <svg fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>
+                    <span>30 minutes</span>
+                </div>
+                <p class="meeting-description">
+                    In-depth technical discussion about architecture, data pipelines, 
+                    ML systems, or API development for your specific use case.
+                </p>
+                <ul class="meeting-features">
+                    <li>Architecture review & planning</li>
+                    <li>Technology stack recommendations</li>
+                    <li>System design discussion</li>
+                    <li>Live demo of similar projects</li>
+                </ul>
+                <button class="btn">Schedule 30-min Call</button>
+            </div>
+
+            <!-- Project Discovery -->
+            <div class="meeting-card" onclick="openScheduler('project-discovery')">
+                <div class="meeting-icon">🚀</div>
+                <h3 class="meeting-title">Project Discovery Session</h3>
+                <div class="meeting-duration">
+                    <svg fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>
+                    <span>60 minutes</span>
+                </div>
+                <p class="meeting-description">
+                    Comprehensive session for new projects. We'll map out requirements, 
+                    timeline, deliverables, and create an actionable roadmap.
+                </p>
+                <ul class="meeting-features">
+                    <li>Full requirements gathering</li>
+                    <li>Technical roadmap creation</li>
+                    <li>Timeline & milestone planning</li>
+                    <li>Cost & resource estimation</li>
+                    <li>Risk assessment</li>
+                </ul>
+                <button class="btn">Schedule 60-min Call</button>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Prefer Another Way to Connect?</h2>
+            <p>Feel free to reach out directly via email or check out my work on GitHub</p>
+            
+            <div class="contact-links">
+                <a href="mailto:bilelnasrinasri91@gmail.com" class="contact-link">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                    </svg>
+                    bilelnasrinasri91@gmail.com
+                </a>
+                
+                <a href="https://github.com/biso1991" target="_blank" class="contact-link">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub Profile
+                </a>
+
+                <a href="https://api-dashboard-bt8.pages.dev" target="_blank" class="contact-link">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319z"/>
+                    </svg>
+                    Live Projects
+                </a>
+            </div>
+            
+            <!-- Direct Calendly Links -->
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;">Or Schedule Directly on Calendly</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+                    <a href="https://calendly.com/bilelnasrinasri91/quick-consultation" target="_blank" class="btn" style="background: var(--card-bg); border: 2px solid var(--primary-color);">
+                        💬 Quick Consultation
+                    </a>
+                    <a href="https://calendly.com/bilelnasrinasri91/technical-deep-dive" target="_blank" class="btn" style="background: var(--card-bg); border: 2px solid var(--primary-color);">
+                        🔧 Technical Deep Dive
+                    </a>
+                    <a href="https://calendly.com/bilelnasrinasri91/30min" target="_blank" class="btn" style="background: var(--card-bg); border: 2px solid var(--primary-color);">
+                        🚀 Project Discussion
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Home Button -->
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="index.html" class="btn" style="background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; display: inline-block; padding: 0.75rem 2rem;">
+                    🏠 Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Scheduling -->
+    <div id="scheduling-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Schedule Your Meeting</h2>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <a href="index.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        🏠 Home
+                    </a>
+                    <button class="modal-close" onclick="closeScheduler()">×</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Instructions for manual booking -->
+                <div style="text-align: center; padding: 3rem 1rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                    <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Let's Schedule a Meeting</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                        To schedule a meeting, please email me at 
+                        <a href="mailto:bilelnasrinasri91@gmail.com" style="color: var(--primary-color); text-decoration: none;">
+                            bilelnasrinasri91@gmail.com
+                        </a>
+                        with your preferred date and time.
+                    </p>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                        I typically respond within 24 hours and will send you a Google Meet link.
+                    </p>
+                    
+                    <div style="margin-top: 2rem; margin-bottom: 2rem; text-align: center;">
+                        <a href="index.html" class="btn" style="background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; display: inline-block;">
+                            🏠 Home
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Alternative Options:</h4>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <a href="mailto:bilelnasrinasri91@gmail.com?subject=Meeting Request - Quick Consultation&body=Hi Bilel,%0D%0A%0D%0AI would like to schedule a meeting to discuss:%0D%0A%0D%0APreferred Date:%0D%0APreferred Time (Timezone):%0D%0A%0D%0ATopic:%0D%0A%0D%0AThank you!" class="btn" style="display: inline-block; width: auto;">
+                                Email Me Directly
+                            </a>
+                            <button class="btn btn-outline" onclick="closeScheduler()">
+                                Go Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Home Button Banner Above Calendly -->
+                <div style="background: linear-gradient(135deg, #00d4ff15 0%, #8b5cf615 100%); border: 2px solid #00d4ff; border-radius: 12px; padding: 1.5rem; margin: 2rem 1rem; text-align: center;">
+                    <p style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem;">
+                        👇 Schedule directly below, or return to portfolio
+                    </p>
+                    <a href="index.html" class="btn" style="background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%); border: none; display: inline-block; padding: 0.75rem 2rem;">
+                        🏠 Back to Home
+                    </a>
+                </div>
+
+                <!-- Calendly Inline Widget -->
+                <div class="calendly-wrapper">
+                    <div class="calendly-inline-widget" 
+                         data-url="https://calendly.com/bilelnasrinasri91"
+                         style="min-width:320px;height:700px;">
+                    </div>
+                    <a href="index.html" class="calendly-home-button">🏠 Home</a>
+                </div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('scheduling-modal');
+        const modalTitle = document.getElementById('modal-title');
+
+        const meetingTypes = {
+            'quick-consultation': {
+                title: 'Schedule Quick Consultation (15 min)',
+                calendlyUrl: 'https://calendly.com/bilelnasrinasri91/quick-consultation'
+            },
+            'technical-deep-dive': {
+                title: 'Schedule Technical Deep Dive (60 min)',
+                calendlyUrl: 'https://calendly.com/bilelnasrinasri91/technical-deep-dive'
+            },
+            'project-discovery': {
+                title: 'Schedule Project Discussion (30 min)',
+                calendlyUrl: 'https://calendly.com/bilelnasrinasri91/30min'
+            }
+        };
+
+        function openScheduler(meetingType) {
+            const meeting = meetingTypes[meetingType];
+            if (meeting) {
+                modalTitle.textContent = meeting.title;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeScheduler() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on background click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeScheduler();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeScheduler();
+            }
+        });
+    </script>
+</body>
+</html>
