@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Test outputs
+playwright-report/
+test-results/
+playwright/.cache/
+
+# Screenshots
+*.png
+!docs/**/*.png
+
+# Traces
+trace.zip
