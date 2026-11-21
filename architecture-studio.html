@@ -332,6 +332,231 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+        
+        /* Tooltip */
+        .node-tooltip {
+            position: absolute;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            padding: var(--space-3);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .node-tooltip.visible {
+            opacity: 1;
+        }
+        
+        .tooltip-title {
+            font-size: var(--text-base);
+            font-weight: var(--font-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+        
+        .tooltip-desc {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-2);
+        }
+        
+        .tooltip-tech {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-1);
+        }
+        
+        .tooltip-tech-item {
+            background: var(--bg-surface);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+        }
+        
+        /* Node Details Panel */
+        .details-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: var(--bg-surface);
+            border-left: 1px solid var(--border-medium);
+            padding: var(--space-6);
+            overflow-y: auto;
+            z-index: 2000;
+            transition: right 0.3s ease;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .details-panel.open {
+            right: 0;
+        }
+        
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-6);
+        }
+        
+        .details-title {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: var(--text-2xl);
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+        
+        .close-btn:hover {
+            background: var(--bg-surface-elevated);
+            color: var(--text-primary);
+        }
+        
+        .details-section {
+            margin-bottom: var(--space-6);
+        }
+        
+        .details-label {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+        
+        .details-value {
+            font-size: var(--text-base);
+            color: var(--text-primary);
+            margin-bottom: var(--space-3);
+        }
+        
+        .details-badge {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+        
+        .details-badge.professional {
+            border-color: var(--success);
+            color: var(--success);
+        }
+        
+        .details-badge.personal {
+            border-color: var(--flow-cyan);
+            color: var(--flow-cyan);
+        }
+        
+        .details-badge.familiarity {
+            border-color: var(--text-tertiary);
+            color: var(--text-tertiary);
+        }
+        
+        /* Case Study Controls */
+        .case-study-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-6);
+            padding: var(--space-4);
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .case-study-btn {
+            padding: var(--space-2) var(--space-4);
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            transition: all var(--duration-base);
+        }
+        
+        .case-study-btn:hover {
+            border-color: var(--accent-secondary);
+            color: var(--text-primary);
+        }
+        
+        .case-study-btn.active {
+            background: var(--accent-secondary);
+            color: var(--bg-primary);
+            border-color: var(--accent-secondary);
+        }
+        
+        /* Dimming Effect */
+        .node-group.dimmed {
+            opacity: 0.2;
+        }
+        
+        .connection-line.dimmed {
+            opacity: 0.1;
+        }
+        
+        .node-group.highlighted {
+            opacity: 1;
+        }
+        
+        .connection-line.highlighted {
+            opacity: 0.6;
+        }
+        
+        /* Mobile Bottom Sheet */
+        @media (max-width: 768px) {
+            .details-panel {
+                right: auto;
+                left: 0;
+                bottom: -100vh;
+                top: auto;
+                width: 100%;
+                height: 70vh;
+                border-left: none;
+                border-top: 1px solid var(--border-medium);
+                border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+                transition: bottom 0.3s ease;
+            }
+            
+            .details-panel.open {
+                bottom: 0;
+                right: auto;
+            }
+            
+            .svg-container {
+                overflow-x: scroll;
+            }
+            
+            #architecture-svg {
+                min-width: 1200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -395,6 +620,25 @@
             </button>
         </div>
         
+        <!-- Case Study Controls -->
+        <div class="case-study-controls">
+            <button class="case-study-btn" data-case-study="none" aria-label="View complete architecture">
+                All Projects
+            </button>
+            <button class="case-study-btn" data-case-study="signalforge" aria-label="View SignalForge case study">
+                SignalForge
+            </button>
+            <button class="case-study-btn" data-case-study="ubiai" aria-label="View UBIAI case study">
+                UBIAI
+            </button>
+            <button class="case-study-btn" data-case-study="ecommerce" aria-label="View E-commerce case study">
+                E-commerce
+            </button>
+            <button class="case-study-btn" data-case-study="production-apis" aria-label="View Production APIs case study">
+                Production APIs
+            </button>
+        </div>
+        
         <!-- SVG Visualization -->
         <div class="svg-container" id="viz-container">
             <canvas id="particle-canvas"></canvas>
@@ -402,6 +646,61 @@
                 <!-- Dynamically populated -->
             </svg>
         </div>
+        
+        <!-- Tooltip -->
+        <div id="node-tooltip" class="node-tooltip" role="tooltip" aria-hidden="true">
+            <div class="tooltip-title"></div>
+            <div class="tooltip-desc"></div>
+            <div class="tooltip-tech"></div>
+        </div>
+        
+        <!-- Details Panel -->
+        <aside id="details-panel" class="details-panel" role="complementary" aria-label="Node details panel" aria-hidden="true">
+            <div class="details-header">
+                <h2 class="details-title" id="details-title">Node Details</h2>
+                <button class="close-btn" id="close-details" aria-label="Close details panel">×</button>
+            </div>
+            
+            <div class="details-section">
+                <div class="details-label">Technology</div>
+                <div class="details-value" id="details-name"></div>
+            </div>
+            
+            <div class="details-section">
+                <div class="details-label">Layer</div>
+                <div class="details-value" id="details-layer"></div>
+            </div>
+            
+            <div class="details-section">
+                <div class="details-label">Experience</div>
+                <div id="details-experience"></div>
+            </div>
+            
+            <div class="details-section" id="details-project-section">
+                <div class="details-label">Project</div>
+                <div class="details-value" id="details-project"></div>
+            </div>
+            
+            <div class="details-section">
+                <div class="details-label">Description</div>
+                <div class="details-value" id="details-description"></div>
+            </div>
+            
+            <div class="details-section">
+                <div class="details-label">Role in Architecture</div>
+                <div class="details-value" id="details-role"></div>
+            </div>
+            
+            <div class="details-section" id="details-tech-section">
+                <div class="details-label">Technologies</div>
+                <div class="details-value" id="details-technologies"></div>
+            </div>
+            
+            <div class="details-section" id="details-impl-section">
+                <div class="details-label">Implementation</div>
+                <div class="details-value" id="details-implementation"></div>
+            </div>
+        </aside>
         
         <!-- Loading State -->
         <div class="loading" id="loading">
@@ -558,6 +857,10 @@
                 group.classList.add('node-group');
                 group.id = `node-${node.id}`;
                 group.setAttribute('data-experience', node.experience);
+                group.setAttribute('data-node-id', node.id);
+                group.setAttribute('tabindex', '0');
+                group.setAttribute('role', 'button');
+                group.setAttribute('aria-label', `${node.name} - ${node.tooltip.title}`);
                 
                 // Circle
                 const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -590,6 +893,9 @@
                 
                 nodesGroup.appendChild(group);
                 nodeElements.set(node.id, group);
+                
+                // Add interaction handlers
+                setupNodeInteraction(group, node);
             });
             
             svg.appendChild(nodesGroup);
@@ -670,6 +976,355 @@
         }
         
         init();
+        
+        // === INTERACTION SYSTEM ===
+        
+        // Interaction state
+        let interactionState = {
+            selectedNode: null,
+            hoveredNode: null,
+            activeCaseStudy: null,
+            tooltipTimeout: null
+        };
+        
+        // Tooltip element
+        const tooltip = document.getElementById('node-tooltip');
+        const detailsPanel = document.getElementById('details-panel');
+        
+        // Setup node interaction handlers
+        function setupNodeInteraction(group, node) {
+            // Desktop hover
+            group.addEventListener('mouseenter', (e) => {
+                if (!interactionState.selectedNode) {
+                    showTooltip(node, e);
+                }
+            });
+            
+            group.addEventListener('mouseleave', () => {
+                hideTooltip();
+            });
+            
+            group.addEventListener('mousemove', (e) => {
+                if (tooltip.classList.contains('visible')) {
+                    positionTooltip(e);
+                }
+            });
+            
+            // Click to show details
+            group.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectNode(node);
+            });
+            
+            // Touch support (mobile)
+            group.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                selectNode(node);
+            });
+            
+            // Keyboard support
+            group.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectNode(node);
+                }
+            });
+        }
+        
+        // Show tooltip
+        function showTooltip(node, event) {
+            clearTimeout(interactionState.tooltipTimeout);
+            
+            interactionState.tooltipTimeout = setTimeout(() => {
+                const titleEl = tooltip.querySelector('.tooltip-title');
+                const descEl = tooltip.querySelector('.tooltip-desc');
+                const techEl = tooltip.querySelector('.tooltip-tech');
+                
+                titleEl.textContent = node.tooltip.title;
+                descEl.textContent = node.tooltip.description;
+                
+                // Technologies
+                techEl.innerHTML = '';
+                if (node.tooltip.technologies && node.tooltip.technologies.length > 0) {
+                    node.tooltip.technologies.forEach(tech => {
+                        const span = document.createElement('span');
+                        span.className = 'tooltip-tech-item';
+                        span.textContent = tech;
+                        techEl.appendChild(span);
+                    });
+                }
+                
+                tooltip.classList.add('visible');
+                tooltip.setAttribute('aria-hidden', 'false');
+                positionTooltip(event);
+                
+                interactionState.hoveredNode = node.id;
+            }, 100); // Small delay to prevent flicker
+        }
+        
+        // Hide tooltip
+        function hideTooltip() {
+            clearTimeout(interactionState.tooltipTimeout);
+            tooltip.classList.remove('visible');
+            tooltip.setAttribute('aria-hidden', 'true');
+            interactionState.hoveredNode = null;
+        }
+        
+        // Position tooltip avoiding viewport boundaries
+        function positionTooltip(event) {
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            let x = event.clientX + 15;
+            let y = event.clientY + 15;
+            
+            // Avoid right edge
+            if (x + tooltipRect.width > viewportWidth - 20) {
+                x = event.clientX - tooltipRect.width - 15;
+            }
+            
+            // Avoid bottom edge
+            if (y + tooltipRect.height > viewportHeight - 20) {
+                y = event.clientY - tooltipRect.height - 15;
+            }
+            
+            // Avoid left edge
+            if (x < 20) {
+                x = 20;
+            }
+            
+            // Avoid top edge
+            if (y < 20) {
+                y = 20;
+            }
+            
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+        }
+        
+        // Select node and show details
+        function selectNode(node) {
+            interactionState.selectedNode = node.id;
+            hideTooltip();
+            showNodeDetails(node);
+            
+            // Update visual state
+            const group = nodeElements.get(node.id);
+            if (group) {
+                group.setAttribute('aria-expanded', 'true');
+            }
+        }
+        
+        // Deselect node
+        function deselectNode() {
+            if (interactionState.selectedNode) {
+                const group = nodeElements.get(interactionState.selectedNode);
+                if (group) {
+                    group.setAttribute('aria-expanded', 'false');
+                }
+            }
+            
+            interactionState.selectedNode = null;
+            hideNodeDetails();
+        }
+        
+        // Show node details panel
+        function showNodeDetails(node) {
+            // Populate details
+            document.getElementById('details-title').textContent = node.name;
+            document.getElementById('details-name').textContent = node.name;
+            document.getElementById('details-layer').textContent = node.layer.toUpperCase();
+            document.getElementById('details-description').textContent = node.tooltip.description;
+            
+            // Experience badge
+            const expContainer = document.getElementById('details-experience');
+            expContainer.innerHTML = '';
+            const badge = document.createElement('span');
+            badge.className = `details-badge ${node.experience}`;
+            
+            if (node.experience === 'professional') {
+                badge.textContent = 'Professional (UBIAI Internship)';
+            } else if (node.experience === 'personal-project') {
+                badge.textContent = 'Personal Project';
+            } else if (node.experience === 'architecture-familiarity') {
+                badge.textContent = 'Architecture Familiarity';
+            }
+            expContainer.appendChild(badge);
+            
+            // Project
+            const projectSection = document.getElementById('details-project-section');
+            if (node.project) {
+                projectSection.style.display = 'block';
+                document.getElementById('details-project').textContent = node.project;
+            } else {
+                projectSection.style.display = 'none';
+            }
+            
+            // Role
+            document.getElementById('details-role').textContent = node.tooltip.experience || 'Part of system architecture';
+            
+            // Technologies
+            const techSection = document.getElementById('details-tech-section');
+            if (node.tooltip.technologies && node.tooltip.technologies.length > 0) {
+                techSection.style.display = 'block';
+                document.getElementById('details-technologies').textContent = node.tooltip.technologies.join(', ');
+            } else {
+                techSection.style.display = 'none';
+            }
+            
+            // Implementation details
+            const implSection = document.getElementById('details-impl-section');
+            if (node.details && node.details.how) {
+                implSection.style.display = 'block';
+                document.getElementById('details-implementation').textContent = node.details.how;
+            } else {
+                implSection.style.display = 'none';
+            }
+            
+            // Show panel
+            detailsPanel.classList.add('open');
+            detailsPanel.setAttribute('aria-hidden', 'false');
+            
+            // Focus on close button for accessibility
+            setTimeout(() => {
+                document.getElementById('close-details').focus();
+            }, 100);
+        }
+        
+        // Hide node details panel
+        function hideNodeDetails() {
+            detailsPanel.classList.remove('open');
+            detailsPanel.setAttribute('aria-hidden', 'true');
+            
+            // Return focus to selected node if it exists
+            if (interactionState.selectedNode) {
+                const group = nodeElements.get(interactionState.selectedNode);
+                if (group) {
+                    group.focus();
+                }
+            }
+        }
+        
+        // Close details button
+        document.getElementById('close-details').addEventListener('click', deselectNode);
+        
+        // Click outside to close
+        document.addEventListener('click', (e) => {
+            if (interactionState.selectedNode && 
+                !detailsPanel.contains(e.target) && 
+                !e.target.closest('.node-group')) {
+                deselectNode();
+            }
+        });
+        
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (interactionState.selectedNode) {
+                    deselectNode();
+                } else if (interactionState.activeCaseStudy) {
+                    deactivateCaseStudy();
+                }
+            }
+        });
+        
+        // === CASE STUDY SYSTEM ===
+        
+        function activateCaseStudy(caseStudyId) {
+            // Find case study
+            const caseStudy = intelligencePlatform.caseStudies.find(cs => cs.id === caseStudyId);
+            if (!caseStudy) return;
+            
+            interactionState.activeCaseStudy = caseStudyId;
+            
+            // Dim all nodes and connections
+            intelligencePlatform.nodes.forEach(node => {
+                const element = nodeElements.get(node.id);
+                if (element) {
+                    element.classList.add('dimmed');
+                    element.classList.remove('highlighted');
+                }
+            });
+            
+            intelligencePlatform.connections.forEach(conn => {
+                const element = connectionElements.get(`${conn.from}-${conn.to}`);
+                if (element) {
+                    element.classList.add('dimmed');
+                    element.classList.remove('highlighted');
+                }
+            });
+            
+            // Highlight case study nodes
+            caseStudy.highlightNodes.forEach(nodeId => {
+                const element = nodeElements.get(nodeId);
+                if (element && !element.classList.contains('hidden')) {
+                    element.classList.remove('dimmed');
+                    element.classList.add('highlighted');
+                }
+            });
+            
+            // Highlight connections between highlighted nodes
+            const highlightedSet = new Set(caseStudy.highlightNodes);
+            intelligencePlatform.connections.forEach(conn => {
+                if (highlightedSet.has(conn.from) && highlightedSet.has(conn.to)) {
+                    const element = connectionElements.get(`${conn.from}-${conn.to}`);
+                    if (element && !element.classList.contains('hidden')) {
+                        element.classList.remove('dimmed');
+                        element.classList.add('highlighted');
+                    }
+                }
+            });
+            
+            console.log(`Activated case study: ${caseStudy.name}`);
+        }
+        
+        function deactivateCaseStudy() {
+            interactionState.activeCaseStudy = null;
+            
+            // Remove all dimming and highlighting
+            intelligencePlatform.nodes.forEach(node => {
+                const element = nodeElements.get(node.id);
+                if (element) {
+                    element.classList.remove('dimmed', 'highlighted');
+                }
+            });
+            
+            intelligencePlatform.connections.forEach(conn => {
+                const element = connectionElements.get(`${conn.from}-${conn.to}`);
+                if (element) {
+                    element.classList.remove('dimmed', 'highlighted');
+                }
+            });
+            
+            // Update button states
+            document.querySelectorAll('.case-study-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.case-study-btn[data-case-study="none"]').classList.add('active');
+        }
+        
+        // Case study button handlers
+        document.querySelectorAll('.case-study-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const caseStudyId = button.dataset.caseStudy;
+                
+                // Update button states
+                document.querySelectorAll('.case-study-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                if (caseStudyId === 'none') {
+                    deactivateCaseStudy();
+                } else {
+                    activateCaseStudy(caseStudyId);
+                }
+            });
+        });
+        
+        // Initialize with "All Projects" selected
+        document.querySelector('.case-study-btn[data-case-study="none"]').classList.add('active');
         
         // === CANVAS PARTICLE ANIMATION SYSTEM ===
         
